@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:base_template_app/my_app.dart';
+import 'package:base_template_app/pomodoro_timer_app.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:stack_trace/stack_trace.dart';
@@ -13,7 +13,7 @@ Future<void> commonMain() async {
   WidgetsFlutterBinding.ensureInitialized();
   runZonedGuarded(() async {
     _configureLogging();
-    runApp(const MyApp());
+    runApp(const PomodoroTimerApp());
   },
       (cause, stacktrace) =>
           Logger.root.fine(cause.toString(), cause, stacktrace));

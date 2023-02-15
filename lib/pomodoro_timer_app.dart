@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class PomodoroTimerApp extends StatelessWidget {
+  const PomodoroTimerApp({super.key});
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-    title: 'Flutter Base Template App',
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-    ),
-    home: const MyHomePage(title: 'Flutter Demo Home Page'),
-  );
+        title: 'Flutter Base Template App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      );
 }
 
 class MyHomePage extends StatefulWidget {

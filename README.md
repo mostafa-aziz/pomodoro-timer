@@ -1,6 +1,6 @@
-# base_template_app
+# Pomodoro timer
 
-A base template for flutter apps
+Pomodoro test timer using MobX and Provider
 
 ## Getting Started
 
