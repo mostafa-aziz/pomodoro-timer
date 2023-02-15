@@ -35,8 +35,8 @@ class _MainComponentState extends State<MainComponent> {
               ),
             ),
             BottomNavigationBar(
-              backgroundColor: Colors.blueGrey,
-              selectedItemColor: Colors.green,
+              backgroundColor: const Color(0xFF1E1B2E),
+              selectedItemColor: const Color(0xFF664FFF),
               onTap: (index) {
                 switch (index) {
                   case 0:
@@ -62,22 +62,22 @@ class _MainComponentState extends State<MainComponent> {
               items: [
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.sports_handball,
-                    color: selectedIndex == 1 ? Colors.green : null,
+                    Icons.timer,
+                    color: selectedIndex == 1 ? const Color(0xFF664FFF) : null,
                   ),
-                  label: 'Cycles',
+                  label: 'Timer',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.fitness_center,
-                    color: selectedIndex == 1 ? Colors.green : null,
+                    Icons.person_rounded,
+                    color: selectedIndex == 1 ? const Color(0xFF664FFF) : null,
                   ),
-                  label: 'Progress',
+                  label: 'Profile',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.settings,
-                    color: selectedIndex == 2 ? Colors.green : null,
+                    color: selectedIndex == 2 ? const Color(0xFF664FFF) : null,
                   ),
                   label: 'Settings',
                 ),
