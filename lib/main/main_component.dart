@@ -35,8 +35,9 @@ class _MainComponentState extends State<MainComponent> {
               ),
             ),
             BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: 0,
               backgroundColor: const Color(0xFF1E1B2E),
-              selectedItemColor: const Color(0xFF664FFF),
               onTap: (index) {
                 switch (index) {
                   case 0:
@@ -63,7 +64,7 @@ class _MainComponentState extends State<MainComponent> {
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.timer,
-                    color: selectedIndex == 1 ? const Color(0xFF664FFF) : null,
+                    color: selectedIndex == 0 ? const Color(0xFF664FFF) : null,
                   ),
                   label: 'Timer',
                 ),

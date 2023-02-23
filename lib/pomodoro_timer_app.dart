@@ -1,3 +1,4 @@
+import 'package:base_template_app/core_style/colors.dart';
 import 'package:base_template_app/main/main_component.dart';
 import 'package:flutter/material.dart';
 
@@ -7,9 +8,30 @@ class PomodoroTimerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: 'Flutter Base Template App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: _buildThemeData(),
         home: const MainComponent(),
+      );
+
+  ThemeData _buildThemeData() => ThemeData(
+        colorScheme: COLOR_SCHEME_POMODORO,
+        canvasColor: COLOR_SCHEME_POMODORO.background,
+        appBarTheme: const AppBarTheme(elevation: 0.0),
+        inputDecorationTheme: const InputDecorationTheme(
+          border: InputBorder.none,
+          filled: true,
+        ),
+        textTheme: TextTheme(
+          headline1: TextStyle(color: COLOR_SCHEME_POMODORO.onBackground, fontSize: 25, fontWeight: FontWeight.normal),
+          headline2: TextStyle(color: COLOR_SCHEME_POMODORO.onSurface, fontSize: 23, fontWeight: FontWeight.normal),
+          headline3: TextStyle(color: COLOR_SCHEME_POMODORO.onSurface, fontSize: 20, fontWeight: FontWeight.normal),
+          headline4: TextStyle(color: COLOR_SCHEME_POMODORO.onSurface, fontSize: 18, fontWeight: FontWeight.normal),
+          headline6: TextStyle(color: COLOR_SCHEME_POMODORO.onSurface, fontSize: 20, fontWeight: FontWeight.w600),
+          subtitle1: TextStyle(color: COLOR_SCHEME_POMODORO.onSurface, fontSize: 16, fontWeight: FontWeight.w600),
+          subtitle2: TextStyle(color: COLOR_SCHEME_POMODORO.onSurface, fontSize: 16, fontWeight: FontWeight.normal),
+          bodyText1: TextStyle(color: COLOR_SCHEME_POMODORO.onSurface, fontSize: 14, fontWeight: FontWeight.w600),
+          bodyText2: TextStyle(color: COLOR_SCHEME_POMODORO.onSurface, fontSize: 14),
+          caption: TextStyle(color: COLOR_SCHEME_POMODORO.onSurface, fontSize: 10, fontWeight: FontWeight.w600),
+          button: TextStyle(color: COLOR_SCHEME_POMODORO.onPrimary, fontSize: 16, fontWeight: FontWeight.w600),
+        ),
       );
 }
