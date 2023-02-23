@@ -36,7 +36,6 @@ class _MainComponentState extends State<MainComponent> {
             ),
             BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              currentIndex: 0,
               backgroundColor: const Color(0xFF1E1B2E),
               onTap: (index) {
                 switch (index) {
