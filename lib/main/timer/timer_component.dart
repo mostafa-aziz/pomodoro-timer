@@ -21,30 +21,38 @@ class _TimerComponentState extends State<TimerComponent> {
           backgroundColor: context.colors.background,
           title: Text(
             'Timer',
-            style: context.textStyles.headline6,
+            style: context.textStyles.headlineLarge?.copyWith(color: context.colors.onSecondary),
           ),
         ),
         body: _buildContent(context),
       );
 
   Widget _buildContent(BuildContext context) => Observer(
-      builder: (context) => Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildTimerLabel(context),
-                const SizedBox(height: 24.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildStartTimerButton(context),
-                    const SizedBox(width: 8.0),
-                    _buildResetTimerButton(context),
-                  ],
-                ),
-              ],
-            ),
-          ));
+        builder: (context) => Center(
+          child: Column(
+            children: [
+              const SizedBox(height: 24.0),
+              _buildCircleAvatar(context),
+              const SizedBox(height: 88.0),
+              _buildTimerLabel(context),
+              const SizedBox(height: 24.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildStartTimerButton(context),
+                  const SizedBox(width: 8.0),
+                  _buildResetTimerButton(context),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+
+  Widget _buildCircleAvatar(BuildContext context) => const CircleAvatar(
+        radius: 88.0,
+        backgroundImage: NetworkImage('https://picsum.photos/id/237/200/300'),
+      );
 
   Widget _buildTimerLabel(BuildContext context) {
     String strDigits(int n) => n.toString().padLeft(2, '0');
@@ -68,9 +76,7 @@ class _TimerComponentState extends State<TimerComponent> {
                       _store.stopTimer();
                     }
                   },
-                  child: _store.shouldStartTimer
-                      ? const Icon(Icons.stop)
-                      : const Icon(Icons.play_arrow_rounded),
+                  child: _store.shouldStartTimer ? const Icon(Icons.stop) : const Icon(Icons.play_arrow_rounded),
                 )),
       );
 
