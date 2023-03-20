@@ -1,3 +1,5 @@
+import 'package:base_template_app/core_utils/context_utils.dart';
+import 'package:base_template_app/widgets/app_action_button.dart';
 import 'package:flutter/material.dart';
 
 class TimerComponent extends StatefulWidget {
@@ -9,7 +11,24 @@ class TimerComponent extends StatefulWidget {
 
 class _TimerComponentState extends State<TimerComponent> {
   @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: context.colors.background,
+          title: Text(
+            'Timer',
+            style: context.textStyles.headline6,
+          ),
+        ),
+        body: _buildContent(context),
+      );
+
+  Widget _buildContent(BuildContext context) => Column(
+        children: [
+        ],
+      );
+
+  Widget _buildStartTimerButton(BuildContext context) => AppActionButton(
+        onPressed: () {},
+        child: Text('test'),
+      );
 }
