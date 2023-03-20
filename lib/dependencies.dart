@@ -1,3 +1,5 @@
+import 'package:base_template_app/core_utils/preferences/app_preferences.dart';
+import 'package:base_template_app/main/timer/timer_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -23,7 +25,9 @@ class BaseDependencies extends StatelessWidget {
         child: _child,
       );
 
-  List<SingleChildWidget> _buildBaseProviders() => [];
+  List<SingleChildWidget> _buildBaseProviders() => [
+        Provider(create: (context) => AppPreferences()),
+      ];
 
   List<SingleChildWidget> _buildAuthProviders() => [];
 
@@ -31,5 +35,12 @@ class BaseDependencies extends StatelessWidget {
 
   List<SingleChildWidget> _buildBaseUseCasesProviders() => [];
 
-  List<SingleChildWidget> _buildBaseStoresProviders() => [];
+  List<SingleChildWidget> _buildBaseStoresProviders() => [
+        Provider<TimerStore>(
+          create: (context) => TimerStore(
+            preferences: context.read(),
+          )..load(),
+          dispose: (context, value) => value.dispose(),
+        ),
+      ];
 }

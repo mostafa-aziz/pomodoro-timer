@@ -1,4 +1,5 @@
 import 'package:base_template_app/core_style/colors.dart';
+import 'package:base_template_app/dependencies.dart';
 import 'package:base_template_app/main/main_component.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,9 @@ class PomodoroTimerApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         title: 'Flutter Base Template App',
         theme: _buildThemeData(),
+        builder: (context, child) => BaseDependencies(
+          child: child!,
+        ),
         home: const MainComponent(),
       );
 

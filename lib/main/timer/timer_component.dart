@@ -1,8 +1,9 @@
-import 'dart:async';
-
 import 'package:base_template_app/core_utils/context_utils.dart';
+import 'package:base_template_app/main/timer/timer_store.dart';
 import 'package:base_template_app/widgets/app_action_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 class TimerComponent extends StatefulWidget {
   const TimerComponent({Key? key}) : super(key: key);
@@ -12,8 +13,7 @@ class TimerComponent extends StatefulWidget {
 }
 
 class _TimerComponentState extends State<TimerComponent> {
-  Timer? countdownTimer;
-  Duration myDuration = const Duration(minutes: 25);
+  late final _store = context.read<TimerStore>();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -27,28 +27,29 @@ class _TimerComponentState extends State<TimerComponent> {
         body: _buildContent(context),
       );
 
-  Widget _buildContent(BuildContext context) => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildTimerLabel(context),
-            const SizedBox(height: 24.0),
-            Row(
+  Widget _buildContent(BuildContext context) => Observer(
+      builder: (context) => Center(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildStartTimerButton(context),
-                const SizedBox(width: 8.0),
-                _buildResetTimerButton(context),
+                _buildTimerLabel(context),
+                const SizedBox(height: 24.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildStartTimerButton(context),
+                    const SizedBox(width: 8.0),
+                    _buildResetTimerButton(context),
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
-      );
+          ));
 
   Widget _buildTimerLabel(BuildContext context) {
     String strDigits(int n) => n.toString().padLeft(2, '0');
-    final minutes = strDigits(myDuration.inMinutes.remainder(60));
-    final seconds = strDigits(myDuration.inSeconds.remainder(60));
+    final minutes = strDigits(_store.myDuration.inMinutes.remainder(60));
+    final seconds = strDigits(_store.myDuration.inSeconds.remainder(60));
 
     return Text(
       '$minutes:$seconds',
@@ -58,47 +59,26 @@ class _TimerComponentState extends State<TimerComponent> {
 
   Widget _buildStartTimerButton(BuildContext context) => SizedBox(
         width: 88.0,
-        child: AppActionButton(
-          onPressed: () {
-            if (countdownTimer == null || !countdownTimer!.isActive) {
-              _startTimer();
-            } else {
-              _stopTimer();
-            }
-          },
-          child: countdownTimer != null && countdownTimer!.isActive
-              ? const Icon(Icons.stop)
-              : const Icon(Icons.play_arrow_rounded),
-        ),
+        child: Observer(
+            builder: (context) => AppActionButton(
+                  onPressed: () {
+                    if (_store.countdownTimer == null || !_store.countdownTimer!.isActive) {
+                      _store.startTimer();
+                    } else {
+                      _store.stopTimer();
+                    }
+                  },
+                  child: _store.shouldStartTimer
+                      ? const Icon(Icons.stop)
+                      : const Icon(Icons.play_arrow_rounded),
+                )),
       );
 
   Widget _buildResetTimerButton(BuildContext context) => SizedBox(
         width: 88.0,
         child: AppActionButton(
-          onPressed: () => _resetTimer(),
+          onPressed: () => _store.resetTimer(),
           child: const Icon(Icons.restart_alt_rounded),
         ),
       );
-
-  void _startTimer() => countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) => _setCountDown());
-
-  void _stopTimer() => setState(() => countdownTimer!.cancel());
-
-  void _resetTimer() {
-    _stopTimer();
-    setState(() => myDuration = const Duration(minutes: 25));
-  }
-
-  void _setCountDown() {
-    const reduceSecondsBy = 1;
-
-    setState(() {
-      final seconds = myDuration.inSeconds - reduceSecondsBy;
-      if (seconds < 0) {
-        countdownTimer!.cancel();
-      } else {
-        myDuration = Duration(seconds: seconds);
-      }
-    });
-  }
 }

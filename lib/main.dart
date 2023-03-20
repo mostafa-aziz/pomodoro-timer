@@ -11,12 +11,11 @@ void main() {
 
 Future<void> commonMain() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   runZonedGuarded(() async {
     _configureLogging();
     runApp(const PomodoroTimerApp());
-  },
-      (cause, stacktrace) =>
-          Logger.root.fine(cause.toString(), cause, stacktrace));
+  }, (cause, stacktrace) => Logger.root.fine(cause.toString(), cause, stacktrace));
 }
 
 void _configureLogging() {
@@ -27,8 +26,7 @@ void _configureLogging() {
   }());
 }
 
-final lineSplitRegexp = RegExp(
-    '.{1,${const int.fromEnvironment('DART_LOG_LINE_LENGTH', defaultValue: 180)}}');
+final lineSplitRegexp = RegExp('.{1,${const int.fromEnvironment('DART_LOG_LINE_LENGTH', defaultValue: 180)}}');
 
 void _printLogRecord(LogRecord record) {
   if (record.error == null) {
@@ -42,16 +40,11 @@ void _printLogRecord(LogRecord record) {
     });
   }
   if (record.stackTrace != null) {
-    lineSplitRegexp
-        .allMatches(Trace.format(StackTrace.current))
-        .forEach((match) {
+    lineSplitRegexp.allMatches(Trace.format(StackTrace.current)).forEach((match) {
       debugPrint('${record.level.name}: ${record.time}: ${match.group(0)}');
     });
-    debugPrint(
-        '${record.level.name}: ${record.time}: <asynchronous suspension>');
-    lineSplitRegexp
-        .allMatches(Trace.format(record.stackTrace!))
-        .forEach((match) {
+    debugPrint('${record.level.name}: ${record.time}: <asynchronous suspension>');
+    lineSplitRegexp.allMatches(Trace.format(record.stackTrace!)).forEach((match) {
       debugPrint('${record.level.name}: ${record.time}: ${match.group(0)}');
     });
   }
