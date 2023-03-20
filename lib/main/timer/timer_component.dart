@@ -1,6 +1,7 @@
 import 'package:base_template_app/core_utils/context_utils.dart';
 import 'package:base_template_app/main/timer/timer_store.dart';
 import 'package:base_template_app/widgets/app_action_button.dart';
+import 'package:base_template_app/widgets/app_semi_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -29,20 +30,33 @@ class _TimerComponentState extends State<TimerComponent> {
 
   Widget _buildContent(BuildContext context) => Observer(
         builder: (context) => Center(
-          child: Column(
+          child: Stack(
+            alignment: AlignmentDirectional.center,
             children: [
-              const SizedBox(height: 24.0),
-              _buildCircleAvatar(context),
-              const SizedBox(height: 88.0),
-              _buildTimerLabel(context),
-              const SizedBox(height: 24.0),
-              Row(
+              Align(
+                alignment: Alignment.topCenter,
+                child: _buildCircleAvatar(context),
+              ),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildStartTimerButton(context),
-                  const SizedBox(width: 8.0),
-                  _buildResetTimerButton(context),
+                  _buildTimerLabel(context),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildStartTimerButton(context),
+                      const SizedBox(width: 8.0),
+                      _buildResetTimerButton(context),
+                    ],
+                  ),
                 ],
+              ),
+              const Align(
+                alignment: Alignment.bottomCenter,
+                child: MySemiCircle(
+                  height: 430,
+                  color: Colors.blue,
+                ),
               ),
             ],
           ),
