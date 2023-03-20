@@ -1,7 +1,6 @@
 import 'package:base_template_app/core_utils/context_utils.dart';
 import 'package:base_template_app/main/timer/timer_store.dart';
 import 'package:base_template_app/widgets/app_action_button.dart';
-import 'package:base_template_app/widgets/app_semi_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -30,17 +29,15 @@ class _TimerComponentState extends State<TimerComponent> {
 
   Widget _buildContent(BuildContext context) => Observer(
         builder: (context) => Center(
-          child: Stack(
-            alignment: AlignmentDirectional.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: _buildCircleAvatar(context),
-              ),
+              _buildCircleAvatar(context),
+              const Spacer(),
               Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildTimerLabel(context),
+                  const SizedBox(height: 48.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -51,12 +48,22 @@ class _TimerComponentState extends State<TimerComponent> {
                   ),
                 ],
               ),
-              const Align(
-                alignment: Alignment.bottomCenter,
-                child: MySemiCircle(
-                  height: 430,
-                  color: Colors.blue,
+              const Spacer(),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(100),
+                    topLeft: Radius.circular(100),
+                  ),
+                  color: context.colors.onSecondary,
                 ),
+                height: 148.0,
+                width: double.infinity,
+                child: Center(
+                    child: Text(
+                  'You got this!',
+                  style: context.textStyles.headline3?.copyWith(color: context.colors.primary),
+                )),
               ),
             ],
           ),
