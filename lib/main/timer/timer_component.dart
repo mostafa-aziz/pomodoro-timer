@@ -22,13 +22,37 @@ class _TimerComponentState extends State<TimerComponent> {
         body: _buildContent(context),
       );
 
-  Widget _buildContent(BuildContext context) => Column(
-        children: [
-        ],
+  Widget _buildContent(BuildContext context) => Center(
+        child: Column(
+          children: [
+            const SizedBox(height: 24.0),
+            Text('Test'),
+            const SizedBox(height: 24.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildStartTimerButton(context),
+                const SizedBox(width: 8.0),
+                _buildResetTimerButton(context),
+              ],
+            ),
+          ],
+        ),
       );
 
-  Widget _buildStartTimerButton(BuildContext context) => AppActionButton(
-        onPressed: () {},
-        child: Text('test'),
+  Widget _buildStartTimerButton(BuildContext context) => SizedBox(
+        width: 88.0,
+        child: AppActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.play_arrow_rounded),
+        ),
+      );
+
+  Widget _buildResetTimerButton(BuildContext context) => SizedBox(
+        width: 88.0,
+        child: AppActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.restart_alt_rounded),
+        ),
       );
 }
