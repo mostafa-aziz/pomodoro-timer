@@ -1,3 +1,4 @@
+import 'package:base_template_app/core_utils/context_utils.dart';
 import 'package:base_template_app/main/profile/profile_component.dart';
 import 'package:base_template_app/main/settings/settings_component.dart';
 import 'package:base_template_app/main/timer/timer_component.dart';
@@ -37,6 +38,7 @@ class _MainComponentState extends State<MainComponent> {
             BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               backgroundColor: const Color(0xFF1E1B2E),
+              unselectedItemColor: context.colors.onPrimary,
               onTap: (index) {
                 switch (index) {
                   case 0:
