@@ -61,9 +61,9 @@ class _TimerComponentState extends State<TimerComponent> {
         child: AppActionButton(
           onPressed: () {
             if (countdownTimer == null || !countdownTimer!.isActive) {
-              startTimer();
+              _startTimer();
             } else {
-              stopTimer();
+              _stopTimer();
             }
           },
           child: countdownTimer != null && countdownTimer!.isActive
@@ -75,25 +75,21 @@ class _TimerComponentState extends State<TimerComponent> {
   Widget _buildResetTimerButton(BuildContext context) => SizedBox(
         width: 88.0,
         child: AppActionButton(
-          onPressed: () {},
+          onPressed: () => _resetTimer(),
           child: const Icon(Icons.restart_alt_rounded),
         ),
       );
 
-  void startTimer() {
-    countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
-  }
+  void _startTimer() => countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) => _setCountDown());
 
-  void stopTimer() {
-    setState(() => countdownTimer!.cancel());
-  }
+  void _stopTimer() => setState(() => countdownTimer!.cancel());
 
-  void resetTimer() {
-    stopTimer();
+  void _resetTimer() {
+    _stopTimer();
     setState(() => myDuration = const Duration(minutes: 25));
   }
 
-  void setCountDown() {
+  void _setCountDown() {
     const reduceSecondsBy = 1;
 
     setState(() {
