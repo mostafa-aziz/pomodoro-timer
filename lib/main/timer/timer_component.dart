@@ -108,16 +108,17 @@ class _TimerComponentState extends State<TimerComponent> {
   Widget _buildStartTimerButton(BuildContext context) => SizedBox(
         width: 88.0,
         child: Observer(
-            builder: (context) => AppActionButton(
-                  onPressed: () {
-                    if (_store.countdownTimer == null || !_store.countdownTimer!.isActive) {
-                      _store.startTimer();
-                    } else {
-                      _store.stopTimer();
-                    }
-                  },
-                  child: _store.shouldStartTimer ? const Icon(Icons.stop) : const Icon(Icons.play_arrow_rounded),
-                )),
+          builder: (context) => AppActionButton(
+            onPressed: () {
+              if (_store.countdownTimer == null || !_store.countdownTimer!.isActive) {
+                _store.startTimer();
+              } else {
+                _store.stopTimer();
+              }
+            },
+            child: _store.shouldStartTimer ? const Icon(Icons.stop) : const Icon(Icons.play_arrow_rounded),
+          ),
+        ),
       );
 
   Widget _buildResetTimerButton(BuildContext context) => SizedBox(
