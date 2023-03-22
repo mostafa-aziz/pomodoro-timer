@@ -60,10 +60,29 @@ class _TimerComponentState extends State<TimerComponent> {
                 height: 148.0,
                 width: double.infinity,
                 child: Center(
-                    child: Text(
-                  'You got this!',
-                  style: context.textStyles.headline3?.copyWith(color: context.colors.primary),
-                )),
+                  child: Builder(builder: (context) {
+                    if (_store.myDuration.inMinutes == 23) {
+                      return Text(
+                        'You got this!',
+                        style: context.textStyles.headline3?.copyWith(color: context.colors.primary),
+                      );
+                    } else if (_store.myDuration.inMinutes == 15) {
+                      return Text(
+                        'Just 15 more minutes!',
+                        style: context.textStyles.headline3?.copyWith(color: context.colors.primary),
+                      );
+                    } else if (_store.myDuration.inMinutes == 5) {
+                      return Text(
+                        'Wow only 5 minutes left!',
+                        style: context.textStyles.headline3?.copyWith(color: context.colors.primary),
+                      );
+                    }
+                    return Text(
+                      '',
+                      style: context.textStyles.headline3?.copyWith(color: context.colors.primary),
+                    );
+                  }),
+                ),
               ),
             ],
           ),
