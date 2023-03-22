@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:base_template_app/core_utils/preferences/app_preferences.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pomodoro_timer/core_utils/preferences/app_preferences.dart';
 
 part 'timer_store.g.dart';
 

@@ -1,5 +1,5 @@
-import 'package:base_template_app/core_utils/context_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoro_timer/core_utils/context_utils.dart';
 
 class SettingsComponent extends StatefulWidget {
   const SettingsComponent({Key? key}) : super(key: key);

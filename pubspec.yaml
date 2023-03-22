@@ -1,5 +1,5 @@
-name: base_template_app
-description: A base template for flutter apps
+name: pomodoro_timer
+description: A pomodoro timer app
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 

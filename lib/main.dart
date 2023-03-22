@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:base_template_app/pomodoro_timer_app.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:pomodoro_timer/pomodoro_timer_app.dart';
 import 'package:stack_trace/stack_trace.dart';
 
 void main() {

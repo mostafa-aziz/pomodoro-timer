@@ -1,14 +1,13 @@
-import 'package:base_template_app/core_style/colors.dart';
-import 'package:base_template_app/dependencies.dart';
-import 'package:base_template_app/main/main_component.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoro_timer/core_style/colors.dart';
+import 'package:pomodoro_timer/dependencies.dart';
+import 'package:pomodoro_timer/main/main_component.dart';
 
 class PomodoroTimerApp extends StatelessWidget {
   const PomodoroTimerApp({super.key});
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Flutter Base Template App',
         theme: _buildThemeData(),
         builder: (context, child) => BaseDependencies(
           child: child!,

@@ -1,8 +1,8 @@
-import 'package:base_template_app/core_utils/context_utils.dart';
-import 'package:base_template_app/main/profile/profile_component.dart';
-import 'package:base_template_app/main/settings/settings_component.dart';
-import 'package:base_template_app/main/timer/timer_component.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoro_timer/core_utils/context_utils.dart';
+import 'package:pomodoro_timer/main/profile/profile_component.dart';
+import 'package:pomodoro_timer/main/settings/settings_component.dart';
+import 'package:pomodoro_timer/main/timer/timer_component.dart';
 
 class MainComponent extends StatefulWidget {
   const MainComponent({Key? key}) : super(key: key);

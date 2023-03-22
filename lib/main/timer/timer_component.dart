@@ -1,8 +1,8 @@
-import 'package:base_template_app/core_utils/context_utils.dart';
-import 'package:base_template_app/main/timer/timer_store.dart';
-import 'package:base_template_app/widgets/app_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pomodoro_timer/core_utils/context_utils.dart';
+import 'package:pomodoro_timer/main/timer/timer_store.dart';
+import 'package:pomodoro_timer/widgets/app_action_button.dart';
 import 'package:provider/provider.dart';
 
 class TimerComponent extends StatefulWidget {

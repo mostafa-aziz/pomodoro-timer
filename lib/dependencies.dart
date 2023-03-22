@@ -1,6 +1,6 @@
-import 'package:base_template_app/core_utils/preferences/app_preferences.dart';
-import 'package:base_template_app/main/timer/timer_store.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoro_timer/core_utils/preferences/app_preferences.dart';
+import 'package:pomodoro_timer/main/timer/timer_store.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
