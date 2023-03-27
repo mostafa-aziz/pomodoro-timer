@@ -51,6 +51,15 @@ mixin _$SettingsStore on SettingsStoreBase, Store {
     return _$loadAsyncAction.run(() => super.load());
   }
 
+  late final _$updateFocusDurationAsyncAction =
+      AsyncAction('SettingsStoreBase.updateFocusDuration', context: context);
+
+  @override
+  Future<void> updateFocusDuration(int focusDuration) {
+    return _$updateFocusDurationAsyncAction
+        .run(() => super.updateFocusDuration(focusDuration));
+  }
+
   late final _$disposeAsyncAction =
       AsyncAction('SettingsStoreBase.dispose', context: context);
 

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pomodoro_timer/core_utils/context_utils.dart';
+import 'package:pomodoro_timer/main/settings/settings_store.dart';
+import 'package:provider/provider.dart';
 
 class SettingsComponent extends StatefulWidget {
   const SettingsComponent({Key? key}) : super(key: key);
@@ -9,6 +12,8 @@ class SettingsComponent extends StatefulWidget {
 }
 
 class _SettingsComponentState extends State<SettingsComponent> {
+  late final _store = context.read<SettingsStore>();
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -65,16 +70,23 @@ class _SettingsComponentState extends State<SettingsComponent> {
           const SizedBox(height: 8.0),
           SizedBox(
             width: double.infinity,
-            child: DropdownButton(
-              value: 25,
-              items: [25, 30, 45, 60]
-                  .map((int value) => DropdownMenuItem(
-                        value: value,
-                        child: Text(value.toString()),
-                      ))
-                  .toList(),
-              onChanged: (_) {},
-            ),
+            child: Observer(
+                builder: (context) => DropdownButton(
+                      value: _store.selectedFocusDuration,
+                      items: _store.durationValues
+                          .map((int value) => DropdownMenuItem(
+                                value: value,
+                                child: Text(value.toString()),
+                              ))
+                          .toList(),
+                      onChanged: (int? focusDuration) async {
+                        if (focusDuration == null) {
+                          return;
+                        }
+
+                        await _store.updateFocusDuration(focusDuration);
+                      },
+                    )),
           )
         ],
       );
@@ -89,12 +101,25 @@ class _SettingsComponentState extends State<SettingsComponent> {
           const SizedBox(height: 8.0),
           SizedBox(
             width: double.infinity,
-            child: DropdownButton(
-              items: [
-                DropdownMenuItem(child: Text('25')),
-              ],
-              onChanged: (_) {},
-            ),
+            child: Observer(
+                builder: (context) => DropdownButton(
+                      value: _store.selectedBreakDuration,
+                      items: _store.durationValues
+                          .map(
+                            (int value) => DropdownMenuItem(
+                              value: value,
+                              child: Text(value.toString()),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (int? breakDuration) async {
+                        if (breakDuration == null) {
+                          return;
+                        }
+
+                        await _store.updateFocusDuration(breakDuration);
+                      },
+                    )),
           )
         ],
       );
