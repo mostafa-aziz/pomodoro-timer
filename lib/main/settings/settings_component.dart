@@ -117,7 +117,7 @@ class _SettingsComponentState extends State<SettingsComponent> {
                           return;
                         }
 
-                        await _store.updateFocusDuration(breakDuration);
+                        await _store.updateBreakDuration(breakDuration);
                       },
                     )),
           )
