@@ -32,7 +32,6 @@ class _TimerComponentState extends State<TimerComponent> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildCircleAvatar(context),
               const Spacer(),
               Column(
                 children: [
@@ -89,10 +88,7 @@ class _TimerComponentState extends State<TimerComponent> {
         ),
       );
 
-  Widget _buildCircleAvatar(BuildContext context) => const CircleAvatar(
-        radius: 88.0,
-        backgroundImage: NetworkImage('https://picsum.photos/id/237/200/300'),
-      );
+
 
   Widget _buildTimerLabel(BuildContext context) {
     String strDigits(int n) => n.toString().padLeft(2, '0');
