@@ -66,9 +66,13 @@ class _SettingsComponentState extends State<SettingsComponent> {
           SizedBox(
             width: double.infinity,
             child: DropdownButton(
-              items: [
-                DropdownMenuItem(child: Text('25')),
-              ],
+              value: 25,
+              items: [25, 30, 45, 60]
+                  .map((int value) => DropdownMenuItem(
+                        value: value,
+                        child: Text(value.toString()),
+                      ))
+                  .toList(),
               onChanged: (_) {},
             ),
           )
