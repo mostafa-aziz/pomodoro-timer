@@ -43,7 +43,7 @@ class AppActionButton extends FilledButton {
       foregroundColor: colorScheme.onPrimary,
       shadowColor: theme.shadowColor,
       disabledForegroundColor: colorScheme.onSurface.withOpacity(0.38),
-      backgroundColor: colorScheme.surface,
+      backgroundColor: colorScheme.primary,
       elevation: 0,
       textStyle: theme.textTheme.button?.copyWith(fontWeight: FontWeight.normal),
       minimumSize: const Size(64, 36),

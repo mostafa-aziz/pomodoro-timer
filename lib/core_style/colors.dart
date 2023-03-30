@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 const COLOR_SCHEME_POMODORO = ColorScheme(
   /// PRIMARY ///
-  primary: Color(0xFF664FFF),
-  onPrimary: Color(0xFFB5B4BB),
+  primary: Color(0xFFE1F6F4),
+  onPrimary: Color(0xFF000000),
+  primaryContainer: Color(0xFF000000),
+  onPrimaryContainer: Color(0xFFFFFFFF),
 
   /// SECONDARY ///
   secondary: Color(0xFF6B4BA6),
@@ -14,8 +16,8 @@ const COLOR_SCHEME_POMODORO = ColorScheme(
   onSurface: Color(0xFFFFFFFF),
 
   /// BACKGROUND ///
-  background: Color(0xFF231F44),
-  onBackground: Color(0xFF2F2F4C),
+  background: Color(0xFFFFFFFF),
+  onBackground: Color(0xFF000000),
 
   /// ERROR ///
   error: Colors.red,

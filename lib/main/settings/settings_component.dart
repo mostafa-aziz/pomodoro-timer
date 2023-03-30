@@ -102,24 +102,25 @@ class _SettingsComponentState extends State<SettingsComponent> {
           SizedBox(
             width: double.infinity,
             child: Observer(
-                builder: (context) => DropdownButton(
-                      value: _store.selectedBreakDuration,
-                      items: _store.durationValues
-                          .map(
-                            (int value) => DropdownMenuItem(
-                              value: value,
-                              child: Text(value.toString()),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (int? breakDuration) async {
-                        if (breakDuration == null) {
-                          return;
-                        }
+              builder: (context) => DropdownButton(
+                value: _store.selectedBreakDuration,
+                items: _store.durationValues
+                    .map(
+                      (int value) => DropdownMenuItem(
+                        value: value,
+                        child: Text(value.toString()),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (int? breakDuration) async {
+                  if (breakDuration == null) {
+                    return;
+                  }
 
-                        await _store.updateBreakDuration(breakDuration);
-                      },
-                    )),
+                  await _store.updateBreakDuration(breakDuration);
+                },
+              ),
+            ),
           )
         ],
       );
