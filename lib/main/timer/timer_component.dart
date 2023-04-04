@@ -60,7 +60,7 @@ class _TimerComponentState extends State<TimerComponent> {
 
     return Text(
       '$minutes:$seconds',
-      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 48.0),
+      style: context.textStyles.headlineLarge,
     );
   }
 
