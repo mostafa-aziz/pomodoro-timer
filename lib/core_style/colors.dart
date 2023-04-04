@@ -19,6 +19,9 @@ const COLOR_SCHEME_POMODORO = ColorScheme(
   background: Color(0xFFFFFFFF),
   onBackground: Color(0xFF000000),
 
+  /// TERTIARY ///
+  tertiary: Color(0xFF656565),
+
   /// ERROR ///
   error: Colors.red,
   onError: Colors.white,

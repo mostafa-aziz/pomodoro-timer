@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pomodoro_timer/core_style/widgets/app_action_button.dart';
 import 'package:pomodoro_timer/core_utils/context_utils.dart';
 import 'package:pomodoro_timer/main/timer/timer_store.dart';
-import 'package:pomodoro_timer/widgets/app_action_button.dart';
 import 'package:provider/provider.dart';
 
 class TimerComponent extends StatefulWidget {
@@ -21,7 +21,7 @@ class _TimerComponentState extends State<TimerComponent> {
           backgroundColor: context.colors.background,
           title: Text(
             'Timer',
-            style: context.textStyles.headlineLarge?.copyWith(color: context.colors.onSecondary),
+            style: context.textStyles.headlineLarge?.copyWith(color: context.colors.onBackground),
           ),
         ),
         body: _buildContent(context),
@@ -48,47 +48,10 @@ class _TimerComponentState extends State<TimerComponent> {
                 ],
               ),
               const Spacer(),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(100),
-                    topLeft: Radius.circular(100),
-                  ),
-                  color: context.colors.onSecondary,
-                ),
-                height: 148.0,
-                width: double.infinity,
-                child: Center(
-                  child: Builder(builder: (context) {
-                    if (_store.myDuration.inMinutes == 23) {
-                      return Text(
-                        'You got this!',
-                        style: context.textStyles.headline3?.copyWith(color: context.colors.primary),
-                      );
-                    } else if (_store.myDuration.inMinutes == 15) {
-                      return Text(
-                        'Just 15 more minutes!',
-                        style: context.textStyles.headline3?.copyWith(color: context.colors.primary),
-                      );
-                    } else if (_store.myDuration.inMinutes == 5) {
-                      return Text(
-                        'Wow only 5 minutes left!',
-                        style: context.textStyles.headline3?.copyWith(color: context.colors.primary),
-                      );
-                    }
-                    return Text(
-                      '',
-                      style: context.textStyles.headline3?.copyWith(color: context.colors.primary),
-                    );
-                  }),
-                ),
-              ),
             ],
           ),
         ),
       );
-
-
 
   Widget _buildTimerLabel(BuildContext context) {
     String strDigits(int n) => n.toString().padLeft(2, '0');
