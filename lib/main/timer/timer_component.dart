@@ -21,7 +21,9 @@ class _TimerComponentState extends State<TimerComponent> {
           backgroundColor: context.colors.background,
           title: Text(
             'Timer',
-            style: context.textStyles.headlineLarge?.copyWith(color: context.colors.onBackground),
+            style: context.textStyles.headlineLarge?.copyWith(
+              color: context.colors.onBackground,
+            ),
           ),
         ),
         body: _buildContent(context),
@@ -69,13 +71,16 @@ class _TimerComponentState extends State<TimerComponent> {
         child: Observer(
           builder: (context) => AppActionButton(
             onPressed: () {
-              if (_store.countdownTimer == null || !_store.countdownTimer!.isActive) {
+              if (_store.countdownTimer == null ||
+                  !_store.countdownTimer!.isActive) {
                 _store.startTimer();
               } else {
                 _store.stopTimer();
               }
             },
-            child: _store.shouldStartTimer ? const Icon(Icons.stop) : const Icon(Icons.play_arrow_rounded),
+            child: _store.shouldStartTimer
+                ? const Icon(Icons.stop)
+                : const Icon(Icons.play_arrow_rounded),
           ),
         ),
       );

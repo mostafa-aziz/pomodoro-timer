@@ -17,7 +17,5 @@ class OnboardingComponent extends StatefulWidget {
 
 class _OnboardingComponentState extends State<OnboardingComponent> {
   @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
+  Widget build(BuildContext context) => Container();
 }
