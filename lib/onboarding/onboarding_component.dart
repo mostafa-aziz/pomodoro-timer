@@ -1,3 +1,4 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -63,6 +64,7 @@ class _OnboardingComponentBaseState extends State<OnboardingComponentBase> {
             Expanded(
               child: _buildOnboardingView(context, cardsToShow),
             ),
+            _buildContinueButton(context, cardsToShow),
           ],
         ),
         Positioned(
@@ -95,6 +97,7 @@ class _OnboardingComponentBaseState extends State<OnboardingComponentBase> {
             }
           });
         },
+        controller: _pageController,
         itemBuilder: (BuildContext context, int index) => onboardingCards[index],
       );
 
@@ -135,6 +138,20 @@ class _OnboardingComponentBaseState extends State<OnboardingComponentBase> {
         ),
       );
 
+  Widget _buildContinueButton(BuildContext context, List<OnboardingCard> onboardingCards) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () async => _navigateToNextOnboardingScreen(context, onboardingCards),
+            child: Text(
+              'Next',
+              style: context.textStyles.titleMedium?.copyWith(color: context.colors.onBackground),
+            ),
+          ),
+        ),
+      );
+
   Widget _buildSkipButton(BuildContext context) => TextButton(
         onPressed: () async => onOnboardingFinished(),
         child: Text(
@@ -143,6 +160,19 @@ class _OnboardingComponentBaseState extends State<OnboardingComponentBase> {
         ),
       );
 
+  Future<void> _navigateToNextOnboardingScreen(BuildContext context, List<OnboardingCard> onboardingCards,
+      {bool shouldAskForPermissions = true}) async {
+    /*if (shouldAskForPermissions) {
+      await _store.onboardingPermissionsHandler(onboardingCards[currentIndex].step);
+    }*/
+
+    if (isLastStep) {
+      await onOnboardingFinished();
+    } else {
+      _pageController.nextPage(duration: 300.milliseconds, curve: Curves.easeIn);
+    }
+  }
+
   Future<void> onOnboardingFinished() async {
     await _store.onOnboardingFinished();
     if (mounted) {
@@ -150,5 +180,12 @@ class _OnboardingComponentBaseState extends State<OnboardingComponentBase> {
         MaterialPageRoute(builder: (context) => const MainComponent()),
       );
     }
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+
+    super.dispose();
   }
 }
