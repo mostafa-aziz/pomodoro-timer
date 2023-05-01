@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pomodoro_timer/core_utils/context_utils.dart';
+import 'package:pomodoro_timer/main/main_component.dart';
 import 'package:pomodoro_timer/onboarding/onboarding_card.dart';
 import 'package:pomodoro_timer/onboarding/onboarding_store.dart';
 import 'package:provider/provider.dart';
@@ -17,13 +19,10 @@ class OnboardingComponent extends StatelessWidget {
   const OnboardingComponent({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      Provider<OnboardingStore>(
-        create: (context) =>
-        OnboardingStore(
+  Widget build(BuildContext context) => Provider<OnboardingStore>(
+        create: (context) => OnboardingStore(
           preferences: context.read(),
-        )
-          ..load(),
+        )..load(),
         dispose: (context, value) => value.dispose(),
         child: const OnboardingComponentBase(),
       );
@@ -35,8 +34,7 @@ class OnboardingComponentBase extends StatefulWidget {
   const OnboardingComponentBase({Key? key}) : super(key: key);
 
   @override
-  _OnboardingComponentBaseState createState() =>
-      _OnboardingComponentBaseState();
+  _OnboardingComponentBaseState createState() => _OnboardingComponentBaseState();
 }
 
 class _OnboardingComponentBaseState extends State<OnboardingComponentBase> {
@@ -46,8 +44,7 @@ class _OnboardingComponentBaseState extends State<OnboardingComponentBase> {
   bool isLastStep = false;
 
   @override
-  Widget build(BuildContext context) =>
-      Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         body: SafeArea(
           child: Observer(
             builder: (context) => _buildOnboardingCards(context),
@@ -59,25 +56,35 @@ class _OnboardingComponentBaseState extends State<OnboardingComponentBase> {
     final List<OnboardingCard> cardsToShow = _generateOnboardingCards(context);
 
     return Stack(
+      alignment: Alignment.center,
       children: [
-        _buildOnboardingView(context, cardsToShow),
+        Column(
+          children: [
+            Expanded(
+              child: _buildOnboardingView(context, cardsToShow),
+            ),
+          ],
+        ),
+        Positioned(
+          top: 24,
+          right: 24,
+          child: _buildSkipButton(context),
+        ),
+        Positioned(
+          bottom: 130,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: _buildDotIndicator(context, cardsToShow.length),
+          ),
+        ),
       ],
     );
   }
 
-  List<OnboardingCard> _generateOnboardingCards(BuildContext context) =>
-      [
-        OnboardingCard(
-          topIcon: SvgPicture.asset('assets/onboarding/onboarding1.svg'),
-          caption: 'Welcome to ',
-          title: 'Socially!',
-          bodyText: 'bodyText',
-          step: OnboardingStepState.INTRO,
-        ),
-      ];
-
-  Widget _buildOnboardingView(BuildContext context,
-      List<Widget> onboardingCards,) =>
+  Widget _buildOnboardingView(
+    BuildContext context,
+    List<Widget> onboardingCards,
+  ) =>
       PageView.builder(
         physics: const NeverScrollableScrollPhysics(),
         onPageChanged: (pageIndex) {
@@ -88,7 +95,60 @@ class _OnboardingComponentBaseState extends State<OnboardingComponentBase> {
             }
           });
         },
-        itemBuilder: (BuildContext context, int index) =>
-        onboardingCards[index],
+        itemBuilder: (BuildContext context, int index) => onboardingCards[index],
       );
+
+  List<OnboardingCard> _generateOnboardingCards(BuildContext context) => [
+        OnboardingCard(
+          topIcon: SvgPicture.asset('assets/onboarding/onboarding1.svg'),
+          caption: 'Welcome to ',
+          title: 'Pomodoro',
+          bodyText: 'Get inspired with this timer app!',
+          step: OnboardingStepState.INTRO,
+        ),
+        OnboardingCard(
+          topIcon: SvgPicture.asset('assets/onboarding/onboarding2.svg'),
+          caption: 'Adjust our',
+          title: 'Timer',
+          bodyText: 'Adjust the Pomodoro timer for great concentration!',
+          step: OnboardingStepState.INTRO,
+        ),
+        OnboardingCard(
+          topIcon: SvgPicture.asset('assets/onboarding/onboarding1.svg'),
+          caption: 'Use our ',
+          title: 'Settings',
+          bodyText: 'Use our settings to cater your experience',
+          step: OnboardingStepState.INTRO,
+        ),
+      ];
+
+  List<Widget> _buildDotIndicator(BuildContext context, int length) => List.generate(
+        length,
+        (index) => Container(
+          height: 10.0,
+          width: 10.0,
+          margin: const EdgeInsets.only(right: 10.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: currentIndex == index ? context.colors.onBackground : context.colors.tertiary,
+          ),
+        ),
+      );
+
+  Widget _buildSkipButton(BuildContext context) => TextButton(
+        onPressed: () async => onOnboardingFinished(),
+        child: Text(
+          'Skip',
+          style: context.textStyles.titleMedium?.copyWith(color: context.colors.onBackground),
+        ),
+      );
+
+  Future<void> onOnboardingFinished() async {
+    await _store.onOnboardingFinished();
+    if (mounted) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const MainComponent()),
+      );
+    }
+  }
 }
