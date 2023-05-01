@@ -3,7 +3,7 @@ import 'package:mobx/mobx.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pomodoro_timer/core_utils/base_store.dart';
 import 'package:pomodoro_timer/core_utils/preferences/app_preferences.dart';
-import 'package:pomodoro_timer/main/onboarding/onboarding_component.dart';
+import 'package:pomodoro_timer/onboarding/onboarding_component.dart';
 
 part 'onboarding_store.g.dart';
 
