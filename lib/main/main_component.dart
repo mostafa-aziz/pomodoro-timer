@@ -4,7 +4,7 @@ import 'package:pomodoro_timer/main/profile/profile_component.dart';
 import 'package:pomodoro_timer/main/settings/settings_component.dart';
 import 'package:pomodoro_timer/main/statistics/statistics_component.dart';
 import 'package:pomodoro_timer/main/timer/timer_component.dart';
-import 'package:pomodoro_timer/widgets/app_navigation_bar.dart';
+import 'package:pomodoro_timer/widgets/navigation_bar/app_navigation_bar.dart';
 
 class MainComponent extends StatefulWidget {
   const MainComponent({Key? key}) : super(key: key);

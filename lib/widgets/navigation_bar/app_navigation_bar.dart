@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pomodoro_timer/core_style/colors.dart';
+import 'package:pomodoro_timer/widgets/navigation_bar/app_navigation_bar_button.dart';
 
 class AppNavigationBar extends StatefulWidget {
   final int selectedIndex;
@@ -40,24 +41,18 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(
-              icon: const Icon(
-                Icons.person_outlined,
-                size: 32.0,
-              ),
+            AppNavigationBarButton(
+              icon: Icons.person_outline,
               onPressed: () => widget.onTap(0),
-              color: _getOutlineColorForButton(0),
+              title: 'Profile',
+              isSelected: widget.selectedIndex == 0,
             ),
             const SizedBox(width: 4.0),
-            SizedBox(
-              child: IconButton(
-                icon: const Icon(
-                  Icons.favorite_border,
-                  size: 32.0,
-                ),
-                onPressed: () => widget.onTap(1),
-                color: _getOutlineColorForButton(1),
-              ),
+            AppNavigationBarButton(
+              icon: Icons.favorite_border,
+              onPressed: () => widget.onTap(1),
+              title: 'Favorites',
+              isSelected: widget.selectedIndex == 1,
             ),
             const SizedBox(width: 4.0),
             Transform.scale(
@@ -74,38 +69,26 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
                             'assets/icons/nav_button_timer.svg',
                           ),
                     onPressed: () => widget.onTap(2),
-                    color: _getOutlineColorForButton(2),
                     padding: EdgeInsets.zero,
                   ),
                 ),
               ),
             ),
             const SizedBox(width: 4.0),
-            SizedBox(
-              child: IconButton(
-                icon: const Icon(
-                  Icons.bar_chart_outlined,
-                  size: 32.0,
-                ),
-                onPressed: () => widget.onTap(3),
-                color: _getOutlineColorForButton(3),
-              ),
+            AppNavigationBarButton(
+              icon: Icons.bar_chart_outlined,
+              onPressed: () => widget.onTap(3),
+              title: 'Chart',
+              isSelected: widget.selectedIndex == 3,
             ),
             const SizedBox(width: 4.0),
-            SizedBox(
-              child: IconButton(
-                icon: const Icon(
-                  Icons.settings_outlined,
-                  size: 32.0,
-                ),
-                onPressed: () => widget.onTap(4),
-                color: _getOutlineColorForButton(4),
-              ),
+            AppNavigationBarButton(
+              icon: Icons.settings_outlined,
+              onPressed: () => widget.onTap(4),
+              title: 'Settings',
+              isSelected: widget.selectedIndex == 4,
             ),
           ],
         ),
       );
-
-  Color _getOutlineColorForButton(int index) =>
-      widget.selectedIndex == index ? COLOR_SCHEME_POMODORO.outline : Colors.black;
 }
