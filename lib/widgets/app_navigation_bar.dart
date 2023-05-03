@@ -49,22 +49,28 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
               color: widget.selectedIndex == 0 ? Colors.blue : Colors.grey,
             ),
             const SizedBox(width: 1), // add some space between the icons
-            Transform.scale(
-              scale: 1.2,
-              child: Transform.translate(
-                offset: const Offset(0, -20),
-                child: SizedBox(
-                  width: 128.0,
-                  height: 128.0,
-                  child: IconButton(
-                    icon: widget.selectedIndex == 1
-                        ? SvgPicture.asset('assets/icons/nav_button_timer_selected.svg')
-                        : SvgPicture.asset(
-                            'assets/icons/nav_button_timer.svg',
-                          ),
-                    onPressed: () => widget.onTap(1),
-                    color: widget.selectedIndex == 1 ? Colors.blue : Colors.grey,
-                    padding: EdgeInsets.zero,
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 24.0,
+                right: 24.0,
+              ),
+              child: Transform.scale(
+                scale: 1.2,
+                child: Transform.translate(
+                  offset: const Offset(0, -20),
+                  child: SizedBox(
+                    width: 128.0,
+                    height: 128.0,
+                    child: IconButton(
+                      icon: widget.selectedIndex == 1
+                          ? SvgPicture.asset('assets/icons/nav_button_timer_selected.svg')
+                          : SvgPicture.asset(
+                              'assets/icons/nav_button_timer.svg',
+                            ),
+                      onPressed: () => widget.onTap(1),
+                      color: widget.selectedIndex == 1 ? Colors.blue : Colors.grey,
+                      padding: EdgeInsets.zero,
+                    ),
                   ),
                 ),
               ),
