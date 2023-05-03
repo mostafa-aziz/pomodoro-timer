@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pomodoro_timer/core_style/widgets/app_action_button.dart';
 import 'package:pomodoro_timer/core_utils/context_utils.dart';
+import 'package:pomodoro_timer/main/settings/settings_store.dart';
 import 'package:pomodoro_timer/main/timer/timer_store.dart';
 import 'package:pomodoro_timer/widgets/dialogs/app_dialog.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ class TimerComponent extends StatefulWidget {
 
 class _TimerComponentState extends State<TimerComponent> {
   late final _store = context.read<TimerStore>();
+  late final _settingsStore = context.read<SettingsStore>();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -57,8 +59,9 @@ class _TimerComponentState extends State<TimerComponent> {
       );
 
   Widget _buildTimerLabel(BuildContext context) {
+    final focusDuration = Duration(minutes: _settingsStore.selectedFocusDuration);
     String strDigits(int n) => n.toString().padLeft(2, '0');
-    final minutes = strDigits(_store.myDuration.inMinutes.remainder(60));
+    final minutes = strDigits(focusDuration.inMinutes.remainder(60));
     final seconds = strDigits(_store.myDuration.inSeconds.remainder(60));
 
     return Text(

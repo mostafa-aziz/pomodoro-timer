@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_timer/core_utils/context_utils.dart';
 import 'package:pomodoro_timer/main/profile/profile_component.dart';
 import 'package:pomodoro_timer/main/settings/settings_component.dart';
 import 'package:pomodoro_timer/main/timer/timer_component.dart';
+import 'package:pomodoro_timer/widgets/app_navigation_bar.dart';
 
 class MainComponent extends StatefulWidget {
   const MainComponent({Key? key}) : super(key: key);
@@ -35,7 +35,38 @@ class _MainComponentState extends State<MainComponent> {
                 ],
               ),
             ),
-            BottomNavigationBar(
+            AppNavigationBar(
+              selectedIndex: 0,
+              onTap: (index) {},
+            ),
+          ],
+        ),
+      );
+
+  void _onPageChanged(int index) {
+    FocusScope.of(context).requestFocus(FocusNode());
+    setState(() => selectedIndex = index);
+  }
+
+  void navigateToTimer() => _pageController.jumpToPage(0);
+
+  Future<void> navigateToProfile() async {
+    _pageController.jumpToPage(1);
+  }
+
+  Future<void> navigateToSettings() async {
+    _pageController.jumpToPage(2);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+}
+
+/*
+* BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               backgroundColor: context.colors.background,
               unselectedItemColor: context.colors.onPrimary,
@@ -84,29 +115,4 @@ class _MainComponentState extends State<MainComponent> {
                   label: 'Settings',
                 ),
               ],
-            ),
-          ],
-        ),
-      );
-
-  void _onPageChanged(int index) {
-    FocusScope.of(context).requestFocus(FocusNode());
-    setState(() => selectedIndex = index);
-  }
-
-  void navigateToTimer() => _pageController.jumpToPage(0);
-
-  Future<void> navigateToProfile() async {
-    _pageController.jumpToPage(1);
-  }
-
-  Future<void> navigateToSettings() async {
-    _pageController.jumpToPage(2);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-}
+            ),*/
