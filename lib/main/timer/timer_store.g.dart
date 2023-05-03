@@ -88,6 +88,17 @@ mixin _$TimerStore on TimerStoreBase, Store {
   }
 
   @override
+  void setDurationTimer(int minutes) {
+    final _$actionInfo = _$TimerStoreBaseActionController.startAction(
+        name: 'TimerStoreBase.setDurationTimer');
+    try {
+      return super.setDurationTimer(minutes);
+    } finally {
+      _$TimerStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void stopTimer() {
     final _$actionInfo = _$TimerStoreBaseActionController.startAction(
         name: 'TimerStoreBase.stopTimer');
@@ -99,11 +110,11 @@ mixin _$TimerStore on TimerStoreBase, Store {
   }
 
   @override
-  void resetTimer() {
+  void resetTimer(int duration) {
     final _$actionInfo = _$TimerStoreBaseActionController.startAction(
         name: 'TimerStoreBase.resetTimer');
     try {
-      return super.resetTimer();
+      return super.resetTimer(duration);
     } finally {
       _$TimerStoreBaseActionController.endAction(_$actionInfo);
     }

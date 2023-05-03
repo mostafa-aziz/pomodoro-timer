@@ -33,19 +33,25 @@ abstract class TimerStoreBase with Store {
   }
 
   @action
+  void setDurationTimer(int minutes) {
+    myDuration = Duration(minutes: minutes);
+  }
+
+  @action
   void stopTimer() {
     countdownTimer!.cancel();
     shouldStartTimer = false;
   }
 
   @action
-  void resetTimer() {
+  void resetTimer(int duration) {
     stopTimer();
-    myDuration = const Duration(minutes: 25);
+    myDuration = Duration(minutes: duration);
   }
 
   void _setCountDown() {
-    final reduceSecondsBy = 1;
+    const reduceSecondsBy = 1;
+
     final seconds = myDuration.inSeconds - reduceSecondsBy;
 
     if (seconds < 0) {

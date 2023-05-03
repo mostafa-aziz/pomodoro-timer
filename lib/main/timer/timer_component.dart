@@ -19,6 +19,12 @@ class _TimerComponentState extends State<TimerComponent> {
   late final _settingsStore = context.read<SettingsStore>();
 
   @override
+  void initState() {
+    super.initState();
+    _store.setDurationTimer(_settingsStore.selectedFocusDuration);
+  }
+
+  @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           backgroundColor: context.colors.background,
@@ -59,9 +65,8 @@ class _TimerComponentState extends State<TimerComponent> {
       );
 
   Widget _buildTimerLabel(BuildContext context) {
-    final focusDuration = Duration(minutes: _settingsStore.selectedFocusDuration);
     String strDigits(int n) => n.toString().padLeft(2, '0');
-    final minutes = strDigits(focusDuration.inMinutes.remainder(60));
+    final minutes = strDigits(_store.myDuration.inMinutes.remainder(60));
     final seconds = strDigits(_store.myDuration.inSeconds.remainder(60));
 
     return Text(
@@ -94,7 +99,7 @@ class _TimerComponentState extends State<TimerComponent> {
   Widget _buildResetTimerButton(BuildContext context) => SizedBox(
         width: 88.0,
         child: AppActionButton(
-          onPressed: () => _store.resetTimer(),
+          onPressed: () => _store.resetTimer(_settingsStore.selectedFocusDuration),
           child: const Icon(Icons.restart_alt_rounded),
         ),
       );
@@ -113,7 +118,7 @@ class _TimerComponentState extends State<TimerComponent> {
           Navigator.of(context).pop();
         },
         onPositivePressed: (context) {
-          _store.resetTimer();
+          _store.resetTimer(_settingsStore.selectedFocusDuration);
           Navigator.of(context).pop();
         },
       );
