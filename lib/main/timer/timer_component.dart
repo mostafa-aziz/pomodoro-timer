@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pomodoro_timer/core_style/widgets/app_action_button.dart';
 import 'package:pomodoro_timer/core_utils/context_utils.dart';
 import 'package:pomodoro_timer/main/timer/timer_store.dart';
+import 'package:pomodoro_timer/widgets/dialogs/app_dialog.dart';
 import 'package:provider/provider.dart';
 
 class TimerComponent extends StatefulWidget {
@@ -70,17 +71,19 @@ class _TimerComponentState extends State<TimerComponent> {
         width: 88.0,
         child: Observer(
           builder: (context) => AppActionButton(
-            onPressed: () {
-              if (_store.countdownTimer == null ||
-                  !_store.countdownTimer!.isActive) {
+            onPressed: () async {
+              if (_store.countdownTimer == null || !_store.countdownTimer!.isActive) {
                 _store.startTimer();
               } else {
                 _store.stopTimer();
+
+                showDialog(
+                  context: context,
+                  builder: (context) => _buildPauseDialog(context),
+                );
               }
             },
-            child: _store.shouldStartTimer
-                ? const Icon(Icons.stop)
-                : const Icon(Icons.play_arrow_rounded),
+            child: _store.shouldStartTimer ? const Icon(Icons.stop) : const Icon(Icons.play_arrow_rounded),
           ),
         ),
       );
@@ -91,5 +94,24 @@ class _TimerComponentState extends State<TimerComponent> {
           onPressed: () => _store.resetTimer(),
           child: const Icon(Icons.restart_alt_rounded),
         ),
+      );
+
+  Widget _buildPauseDialog(BuildContext context) => AppDialog(
+        title: Text(
+          'You paused the timer',
+          style: context.textStyles.headline1,
+        ),
+        content: Text(
+          'Have you lost your concentration already? Try not to stop the timer and concentrate!',
+          style: context.textStyles.subtitle2,
+        ),
+        onNegativePressed: (context) {
+          _store.startTimer();
+          Navigator.of(context).pop();
+        },
+        onPositivePressed: (context) {
+          _store.resetTimer();
+          Navigator.of(context).pop();
+        },
       );
 }

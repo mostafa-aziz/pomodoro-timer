@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/core_style/colors.dart';
 import 'package:pomodoro_timer/dependencies.dart';
 import 'package:pomodoro_timer/main/main_component.dart';
-import 'package:pomodoro_timer/onboarding/onboarding_component.dart';
 
 class PomodoroTimerApp extends StatelessWidget {
   const PomodoroTimerApp({super.key});
@@ -13,7 +12,7 @@ class PomodoroTimerApp extends StatelessWidget {
         builder: (context, child) => BaseDependencies(
           child: child!,
         ),
-        home: const OnboardingComponent(),
+        home: const MainComponent(),
       );
 
   ThemeData _buildThemeData() => ThemeData(
@@ -23,6 +22,10 @@ class PomodoroTimerApp extends StatelessWidget {
         inputDecorationTheme: const InputDecorationTheme(
           border: InputBorder.none,
           filled: true,
+        ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: COLOR_SCHEME_POMODORO.onBackground,
+          textTheme: ButtonTextTheme.primary,
         ),
         textTheme: TextTheme(
           headline1: TextStyle(color: COLOR_SCHEME_POMODORO.onBackground, fontSize: 25, fontWeight: FontWeight.normal),
