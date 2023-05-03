@@ -38,30 +38,47 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
           ),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              icon: const Icon(Icons.person),
+              icon: const Icon(
+                Icons.person,
+                size: 32.0,
+              ),
               onPressed: () => widget.onTap(0),
               color: widget.selectedIndex == 0 ? Colors.blue : Colors.grey,
             ),
             const SizedBox(width: 1), // add some space between the icons
-            SizedBox(
-              width: 128.0,
-              height: 128.0,
-              child: IconButton(
-                icon: widget.selectedIndex == 1
-                    ? SvgPicture.asset('assets/icons/nav_button_timer_selected.svg')
-                    : SvgPicture.asset('assets/icons/nav_button_timer.svg'),
-                onPressed: () => widget.onTap(1),
-                color: widget.selectedIndex == 1 ? Colors.blue : Colors.grey,
+            Transform.scale(
+              scale: 1.2,
+              child: Transform.translate(
+                offset: const Offset(0, -20),
+                child: SizedBox(
+                  width: 128.0,
+                  height: 128.0,
+                  child: IconButton(
+                    icon: widget.selectedIndex == 1
+                        ? SvgPicture.asset('assets/icons/nav_button_timer_selected.svg')
+                        : SvgPicture.asset(
+                            'assets/icons/nav_button_timer.svg',
+                          ),
+                    onPressed: () => widget.onTap(1),
+                    color: widget.selectedIndex == 1 ? Colors.blue : Colors.grey,
+                    padding: EdgeInsets.zero,
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: 1), // add some space between the icons
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () => widget.onTap(2),
-              color: widget.selectedIndex == 2 ? Colors.blue : Colors.grey,
+            SizedBox(
+              child: IconButton(
+                icon: const Icon(
+                  Icons.settings,
+                  size: 32.0,
+                ),
+                onPressed: () => widget.onTap(2),
+                color: widget.selectedIndex == 2 ? Colors.blue : Colors.grey,
+              ),
             ),
           ],
         ),
