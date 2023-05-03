@@ -29,15 +29,27 @@ class _MainComponentState extends State<MainComponent> {
                 physics: const NeverScrollableScrollPhysics(),
                 onPageChanged: _onPageChanged,
                 children: const [
-                  TimerComponent(),
                   ProfileComponent(),
+                  TimerComponent(),
                   SettingsComponent(),
                 ],
               ),
             ),
             AppNavigationBar(
-              selectedIndex: 0,
-              onTap: (index) {},
+              selectedIndex: selectedIndex,
+              onTap: (index) {
+                switch (index) {
+                  case 0:
+                    navigateToProfile();
+                    break;
+                  case 1:
+                    navigateToTimer();
+                    break;
+                  case 2:
+                    navigateToSettings();
+                    break;
+                }
+              },
             ),
           ],
         ),
@@ -48,15 +60,11 @@ class _MainComponentState extends State<MainComponent> {
     setState(() => selectedIndex = index);
   }
 
-  void navigateToTimer() => _pageController.jumpToPage(0);
+  Future<void> navigateToProfile() async => _pageController.jumpToPage(0);
 
-  Future<void> navigateToProfile() async {
-    _pageController.jumpToPage(1);
-  }
+  Future<void> navigateToTimer() async => _pageController.jumpToPage(1);
 
-  Future<void> navigateToSettings() async {
-    _pageController.jumpToPage(2);
-  }
+  Future<void> navigateToSettings() async => _pageController.jumpToPage(2);
 
   @override
   void dispose() {
@@ -64,55 +72,3 @@ class _MainComponentState extends State<MainComponent> {
     super.dispose();
   }
 }
-
-/*
-* BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: context.colors.background,
-              unselectedItemColor: context.colors.onPrimary,
-              onTap: (index) {
-                switch (index) {
-                  case 0:
-                    setState(() {
-                      selectedIndex = 0;
-                    });
-                    navigateToTimer();
-                    break;
-                  case 1:
-                    setState(() {
-                      selectedIndex = 1;
-                    });
-                    navigateToProfile();
-                    break;
-                  case 2:
-                    setState(() {
-                      selectedIndex = 2;
-                    });
-                    navigateToSettings();
-                    break;
-                }
-              },
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.timer,
-                    color: selectedIndex == 0 ? context.colors.onBackground : null,
-                  ),
-                  label: 'Timer',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.person_rounded,
-                    color: selectedIndex == 1 ? context.colors.onBackground : null,
-                  ),
-                  label: 'Profile',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.settings,
-                    color: selectedIndex == 2 ? context.colors.onBackground : null,
-                  ),
-                  label: 'Settings',
-                ),
-              ],
-            ),*/

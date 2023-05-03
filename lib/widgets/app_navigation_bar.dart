@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pomodoro_timer/core_style/colors.dart';
 
 class AppNavigationBar extends StatefulWidget {
@@ -16,58 +17,51 @@ class AppNavigationBar extends StatefulWidget {
 }
 
 class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
-  int _currentIndex = 1; // index of the middle element
-
   @override
   Widget build(BuildContext context) => Container(
         height: 80.0,
         decoration: BoxDecoration(
-            color: COLOR_SCHEME_POMODORO.background,
-            boxShadow: const [
-              BoxShadow(
-                blurRadius: 20.0, // has the effect of softening the shadow
-                spreadRadius: 4.0, // has the effect of extending the shadow
-                offset: Offset(
-                  20.0, // horizontal, move right 10
-                  20.0, // vertical, move down 10
-                ),
-              )
-            ],
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(24.0),
-              topRight: Radius.circular(24.0),
-            )),
+          color: COLOR_SCHEME_POMODORO.background,
+          boxShadow: const [
+            BoxShadow(
+              blurRadius: 20.0,
+              spreadRadius: 4.0,
+              offset: Offset(
+                20.0,
+                20.0,
+              ),
+            )
+          ],
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(24.0),
+            topRight: Radius.circular(24.0),
+          ),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
               icon: const Icon(Icons.person),
-              onPressed: () {
-                setState(() {
-                  _currentIndex = 0;
-                });
-              },
-              color: _currentIndex == 0 ? Colors.blue : Colors.grey,
+              onPressed: () => widget.onTap(0),
+              color: widget.selectedIndex == 0 ? Colors.blue : Colors.grey,
             ),
             const SizedBox(width: 1), // add some space between the icons
-            IconButton(
-              icon: const Icon(Icons.timer),
-              onPressed: () {
-                setState(() {
-                  _currentIndex = 1;
-                });
-              },
-              color: _currentIndex == 1 ? Colors.blue : Colors.grey,
+            SizedBox(
+              width: 128.0,
+              height: 128.0,
+              child: IconButton(
+                icon: widget.selectedIndex == 1
+                    ? SvgPicture.asset('assets/icons/nav_button_timer_selected.svg')
+                    : SvgPicture.asset('assets/icons/nav_button_timer.svg'),
+                onPressed: () => widget.onTap(1),
+                color: widget.selectedIndex == 1 ? Colors.blue : Colors.grey,
+              ),
             ),
             const SizedBox(width: 1), // add some space between the icons
             IconButton(
               icon: const Icon(Icons.settings),
-              onPressed: () {
-                setState(() {
-                  _currentIndex = 2;
-                });
-              },
-              color: _currentIndex == 2 ? Colors.blue : Colors.grey,
+              onPressed: () => widget.onTap(2),
+              color: widget.selectedIndex == 2 ? Colors.blue : Colors.grey,
             ),
           ],
         ),
