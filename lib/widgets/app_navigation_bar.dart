@@ -46,7 +46,7 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
                 size: 32.0,
               ),
               onPressed: () => widget.onTap(0),
-              color: widget.selectedIndex == 0 ? Colors.blue : Colors.grey,
+              color: _getOutlineColorForButton(0),
             ),
             const SizedBox(width: 4.0),
             SizedBox(
@@ -56,7 +56,7 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
                   size: 32.0,
                 ),
                 onPressed: () => widget.onTap(1),
-                color: widget.selectedIndex == 1 ? Colors.blue : Colors.grey,
+                color: _getOutlineColorForButton(1),
               ),
             ),
             const SizedBox(width: 4.0),
@@ -74,7 +74,7 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
                             'assets/icons/nav_button_timer.svg',
                           ),
                     onPressed: () => widget.onTap(2),
-                    color: widget.selectedIndex == 2 ? Colors.blue : Colors.grey,
+                    color: _getOutlineColorForButton(2),
                     padding: EdgeInsets.zero,
                   ),
                 ),
@@ -88,7 +88,7 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
                   size: 32.0,
                 ),
                 onPressed: () => widget.onTap(3),
-                color: widget.selectedIndex == 3 ? Colors.blue : Colors.grey,
+                color: _getOutlineColorForButton(3),
               ),
             ),
             const SizedBox(width: 4.0),
@@ -99,10 +99,12 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
                   size: 32.0,
                 ),
                 onPressed: () => widget.onTap(4),
-                color: widget.selectedIndex == 4 ? Colors.blue : Colors.grey,
+                color: _getOutlineColorForButton(4),
               ),
             ),
           ],
         ),
       );
+
+  Color _getOutlineColorForButton(int index) => widget.selectedIndex == index ? Colors.black : Colors.grey;
 }
