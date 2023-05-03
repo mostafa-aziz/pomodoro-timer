@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoro_timer/main/favorites/favorites_component.dart';
 import 'package:pomodoro_timer/main/profile/profile_component.dart';
 import 'package:pomodoro_timer/main/settings/settings_component.dart';
 import 'package:pomodoro_timer/main/statistics/statistics_component.dart';
@@ -31,6 +32,7 @@ class _MainComponentState extends State<MainComponent> {
                 onPageChanged: _onPageChanged,
                 children: const [
                   ProfileComponent(),
+                  FavoritesComponent(),
                   TimerComponent(),
                   StatisticsComponent(),
                   SettingsComponent(),
@@ -45,12 +47,15 @@ class _MainComponentState extends State<MainComponent> {
                     navigateToProfile();
                     break;
                   case 1:
-                    navigateToTimer();
+                    navigateToFavorites();
                     break;
                   case 2:
-                    navigateToStatistics();
+                    navigateToTimer();
                     break;
                   case 3:
+                    navigateToStatistics();
+                    break;
+                  case 4:
                     navigateToSettings();
                     break;
                 }
@@ -67,11 +72,13 @@ class _MainComponentState extends State<MainComponent> {
 
   Future<void> navigateToProfile() async => _pageController.jumpToPage(0);
 
-  Future<void> navigateToTimer() async => _pageController.jumpToPage(1);
+  Future<void> navigateToFavorites() async => _pageController.jumpToPage(1);
 
-  Future<void> navigateToStatistics() async => _pageController.jumpToPage(2);
+  Future<void> navigateToTimer() async => _pageController.jumpToPage(2);
 
-  Future<void> navigateToSettings() async => _pageController.jumpToPage(3);
+  Future<void> navigateToStatistics() async => _pageController.jumpToPage(3);
+
+  Future<void> navigateToSettings() async => _pageController.jumpToPage(4);
 
   @override
   void dispose() {
