@@ -106,5 +106,6 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
         ),
       );
 
-  Color _getOutlineColorForButton(int index) => widget.selectedIndex == index ? Colors.black : Colors.grey;
+  Color _getOutlineColorForButton(int index) =>
+      widget.selectedIndex == index ? COLOR_SCHEME_POMODORO.outline : Colors.black;
 }

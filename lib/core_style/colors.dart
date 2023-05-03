@@ -28,5 +28,7 @@ const COLOR_SCHEME_POMODORO = ColorScheme(
 
   brightness: Brightness.light,
 
-  /// TERTIARY ///
+  /// OUTLINE ///
+
+  outline: Color(0xFF7DB9B3),
 );
