@@ -20,7 +20,7 @@ class _SettingsComponentState extends State<SettingsComponent> {
           backgroundColor: context.colors.background,
           title: Text(
             'Settings',
-            style: context.textStyles.headline1,
+            style: context.textStyles.headlineLarge?.copyWith(color: context.colors.onBackground),
           ),
         ),
         body: CustomScrollView(
