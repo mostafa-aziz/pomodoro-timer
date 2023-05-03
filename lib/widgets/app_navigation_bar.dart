@@ -42,17 +42,28 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
           children: [
             IconButton(
               icon: const Icon(
-                Icons.person,
+                Icons.person_outlined,
                 size: 32.0,
               ),
               onPressed: () => widget.onTap(0),
               color: widget.selectedIndex == 0 ? Colors.blue : Colors.grey,
             ),
-            const SizedBox(width: 1), // add some space between the icons
+            const SizedBox(width: 1),
+            SizedBox(
+              child: IconButton(
+                icon: const Icon(
+                  Icons.favorite_border,
+                  size: 32.0,
+                ),
+                onPressed: () => widget.onTap(2),
+                color: widget.selectedIndex == 2 ? Colors.blue : Colors.grey,
+              ),
+            ),
+            const SizedBox(width: 1),
             Padding(
               padding: const EdgeInsets.only(
-                left: 24.0,
-                right: 24.0,
+                left: 8.0,
+                right: 8.0,
               ),
               child: Transform.scale(
                 scale: 1.2,
@@ -75,15 +86,26 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
                 ),
               ),
             ),
-            const SizedBox(width: 1), // add some space between the icons
+            const SizedBox(width: 1),
             SizedBox(
               child: IconButton(
                 icon: const Icon(
-                  Icons.settings,
+                  Icons.bar_chart_outlined,
                   size: 32.0,
                 ),
                 onPressed: () => widget.onTap(2),
                 color: widget.selectedIndex == 2 ? Colors.blue : Colors.grey,
+              ),
+            ),
+            const SizedBox(width: 1),
+            SizedBox(
+              child: IconButton(
+                icon: const Icon(
+                  Icons.settings_outlined,
+                  size: 32.0,
+                ),
+                onPressed: () => widget.onTap(3),
+                color: widget.selectedIndex == 3 ? Colors.blue : Colors.grey,
               ),
             ),
           ],
