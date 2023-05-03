@@ -27,14 +27,14 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
               blurRadius: 20.0,
               spreadRadius: 4.0,
               offset: Offset(
-                20.0,
-                20.0,
+                5.0,
+                15.0,
               ),
             )
           ],
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(24.0),
-            topRight: Radius.circular(24.0),
+            topLeft: Radius.circular(32.0),
+            topRight: Radius.circular(32.0),
           ),
         ),
         child: Row(
@@ -48,7 +48,7 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
               onPressed: () => widget.onTap(0),
               color: widget.selectedIndex == 0 ? Colors.blue : Colors.grey,
             ),
-            const SizedBox(width: 1),
+            const SizedBox(width: 4.0),
             SizedBox(
               child: IconButton(
                 icon: const Icon(
@@ -59,34 +59,28 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
                 color: widget.selectedIndex == 1 ? Colors.blue : Colors.grey,
               ),
             ),
-            const SizedBox(width: 1),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 8.0,
-                right: 8.0,
-              ),
-              child: Transform.scale(
-                scale: 1.2,
-                child: Transform.translate(
-                  offset: const Offset(0, -20),
-                  child: SizedBox(
-                    width: 128.0,
-                    height: 128.0,
-                    child: IconButton(
-                      icon: widget.selectedIndex == 2
-                          ? SvgPicture.asset('assets/icons/nav_button_timer_selected.svg')
-                          : SvgPicture.asset(
-                              'assets/icons/nav_button_timer.svg',
-                            ),
-                      onPressed: () => widget.onTap(2),
-                      color: widget.selectedIndex == 2 ? Colors.blue : Colors.grey,
-                      padding: EdgeInsets.zero,
-                    ),
+            const SizedBox(width: 4.0),
+            Transform.scale(
+              scale: 1.2,
+              child: Transform.translate(
+                offset: const Offset(0, -20),
+                child: SizedBox(
+                  width: 128.0,
+                  height: 128.0,
+                  child: IconButton(
+                    icon: widget.selectedIndex == 2
+                        ? SvgPicture.asset('assets/icons/nav_button_timer_selected.svg')
+                        : SvgPicture.asset(
+                            'assets/icons/nav_button_timer.svg',
+                          ),
+                    onPressed: () => widget.onTap(2),
+                    color: widget.selectedIndex == 2 ? Colors.blue : Colors.grey,
+                    padding: EdgeInsets.zero,
                   ),
                 ),
               ),
             ),
-            const SizedBox(width: 1),
+            const SizedBox(width: 4.0),
             SizedBox(
               child: IconButton(
                 icon: const Icon(
@@ -97,7 +91,7 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
                 color: widget.selectedIndex == 3 ? Colors.blue : Colors.grey,
               ),
             ),
-            const SizedBox(width: 1),
+            const SizedBox(width: 4.0),
             SizedBox(
               child: IconButton(
                 icon: const Icon(
