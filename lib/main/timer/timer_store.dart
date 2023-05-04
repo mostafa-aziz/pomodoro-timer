@@ -7,6 +7,8 @@ part 'timer_store.g.dart';
 
 class TimerStore = TimerStoreBase with _$TimerStore;
 
+// TODO(mostafa): Block screen transitions with timer.
+
 abstract class TimerStoreBase with Store {
   final AppPreferences _preferences;
 
@@ -24,7 +26,9 @@ abstract class TimerStoreBase with Store {
   }) : _preferences = preferences;
 
   @action
-  Future<void> load() async {}
+  Future<void> load() async {
+    myDuration = Duration(minutes: await _preferences.getInt('focusDuration'));
+  }
 
   @action
   void startTimer() {
