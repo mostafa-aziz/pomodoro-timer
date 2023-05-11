@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoro_timer/core_utils/database/app_database.dart';
 import 'package:pomodoro_timer/core_utils/preferences/app_preferences.dart';
 import 'package:pomodoro_timer/main/profile/profile_repository.dart';
 import 'package:pomodoro_timer/main/settings/settings_repository.dart';
@@ -31,6 +32,7 @@ class BaseDependencies extends StatelessWidget {
 
   List<SingleChildWidget> _buildBaseProviders() => [
         Provider(create: (context) => AppPreferences()),
+        Provider(create: (context) => AppDatabase.instance),
       ];
 
   List<SingleChildWidget> _buildAuthProviders() => [];
