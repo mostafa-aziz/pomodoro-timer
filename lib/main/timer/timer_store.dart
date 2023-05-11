@@ -30,6 +30,9 @@ abstract class TimerStoreBase with Store {
   bool shouldStartTimer = false;
 
   @observable
+  int completedSessions = 0;
+
+  @observable
   List<TimerSession?> timerSessions = [];
 
   StreamSubscription? _timerSubscription;
@@ -79,6 +82,7 @@ abstract class TimerStoreBase with Store {
   void resetTimer(int duration) {
     stopTimer();
     myDuration = Duration(minutes: duration);
+    completedSessions++;
   }
 
   void _setCountDown() {
@@ -113,6 +117,7 @@ abstract class TimerStoreBase with Store {
   Future<void> clearTimerSessions() async {
     try {
       await _clearTimerSessionUsecase.clearTimerSessions();
+      completedSessions = 0;
     } catch (cause, stacktrace) {
       Logger.root.info(cause.toString(), cause, stacktrace);
     }

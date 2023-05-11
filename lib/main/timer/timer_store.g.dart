@@ -57,6 +57,22 @@ mixin _$TimerStore on TimerStoreBase, Store {
     });
   }
 
+  late final _$completedSessionsAtom =
+      Atom(name: 'TimerStoreBase.completedSessions', context: context);
+
+  @override
+  int get completedSessions {
+    _$completedSessionsAtom.reportRead();
+    return super.completedSessions;
+  }
+
+  @override
+  set completedSessions(int value) {
+    _$completedSessionsAtom.reportWrite(value, super.completedSessions, () {
+      super.completedSessions = value;
+    });
+  }
+
   late final _$timerSessionsAtom =
       Atom(name: 'TimerStoreBase.timerSessions', context: context);
 
@@ -159,6 +175,7 @@ mixin _$TimerStore on TimerStoreBase, Store {
 countdownTimer: ${countdownTimer},
 myDuration: ${myDuration},
 shouldStartTimer: ${shouldStartTimer},
+completedSessions: ${completedSessions},
 timerSessions: ${timerSessions}
     ''';
   }

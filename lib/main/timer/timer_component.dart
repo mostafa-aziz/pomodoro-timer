@@ -156,10 +156,10 @@ class _TimerComponentState extends State<TimerComponent> {
           _store.resetTimer(_settingsStore.selectedFocusDuration);
           await _store.saveTimerSession(
             TimerSession(
-              id: 'sessionFour',
-              sessionName: 'Fourth session',
+              id: _store.completedSessions.toString(),
+              sessionName: 'Session #${_store.completedSessions}',
               sessionDate: DateTime.now(),
-              completedSessions: 2,
+              completedSessions: _store.completedSessions,
             ),
           );
 
