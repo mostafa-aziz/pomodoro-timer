@@ -11,6 +11,7 @@ class TimerDao extends DatabaseAccessor<AppDatabase> with _$TimerDaoMixin {
 
   TimerDao(this.database) : super(database);
 
+  // Metode som kontinuerlig henter endringer som foregår i tabellen med watch() funksjonen
   Stream<List<TimerSession>> watchTimerSessions() => select(timerTable)
       .watch() //
       .map((timerSession) => timerSession.map((timerSession) => timerSession.toDomain()).toList());

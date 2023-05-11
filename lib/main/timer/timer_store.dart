@@ -43,10 +43,12 @@ abstract class TimerStoreBase with Store {
   @action
   Future<void> load() async {
     await getTimerSessions();
+    // Denne lytter til strømmen av timerSessions
     _timerSubscription = _getTimerSessionUsecase.watchTimerSessions().listen(_updateTimerSessions);
     myDuration = Duration(minutes: await _preferences.getInt('focusDuration'));
   }
 
+  // Her oppdaterer vi vår "observable" timerSessions liste hver gang det kommer inn en ny event til streamen
   @action
   Future<void> _updateTimerSessions(List<TimerSession> timerSessions) async {
     this.timerSessions = timerSessions;
@@ -107,5 +109,6 @@ abstract class TimerStoreBase with Store {
   @action
   Future<void> dispose() async {
     countdownTimer?.cancel();
+    _timerSubscription?.cancel();
   }
 }
