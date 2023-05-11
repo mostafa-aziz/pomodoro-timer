@@ -181,6 +181,7 @@ class TimerTableCompanion extends UpdateCompanion<TimerTableData> {
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   late final $TimerTableTable timerTable = $TimerTableTable(this);
+  late final TimerDao timerDao = TimerDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
