@@ -11,6 +11,10 @@ class TimerDao extends DatabaseAccessor<AppDatabase> with _$TimerDaoMixin {
 
   TimerDao(this.database) : super(database);
 
+  Stream<List<TimerSession>> watchTimerSessions() => select(timerTable)
+      .watch() //
+      .map((timerSession) => timerSession.map((timerSession) => timerSession.toDomain()).toList());
+
   Future<List<TimerSession>> fetchTimerSessions() async =>
       (await select(timerTable).get()).map((timerSession) => timerSession.toDomain()).toList();
 

@@ -81,6 +81,15 @@ mixin _$TimerStore on TimerStoreBase, Store {
     return _$loadAsyncAction.run(() => super.load());
   }
 
+  late final _$_updateTimerSessionsAsyncAction =
+      AsyncAction('TimerStoreBase._updateTimerSessions', context: context);
+
+  @override
+  Future<void> _updateTimerSessions(List<TimerSession> timerSessions) {
+    return _$_updateTimerSessionsAsyncAction
+        .run(() => super._updateTimerSessions(timerSessions));
+  }
+
   late final _$getTimerSessionsAsyncAction =
       AsyncAction('TimerStoreBase.getTimerSessions', context: context);
 

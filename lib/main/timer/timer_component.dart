@@ -73,24 +73,27 @@ class _TimerComponentState extends State<TimerComponent> {
       );
 
   Widget _buildTimerSessionsBoard(BuildContext context) => Observer(
-        builder: (context) => Flexible(
-          child: ListView.separated(
-            itemCount: _store.timerSessions.length,
-            separatorBuilder: (BuildContext context, int index) => const Divider(),
-            itemBuilder: (context, index) => ListTile(
-              title: Center(
-                child: Wrap(
-                  children: [
-                    Text(
-                      _store.timerSessions[index]?.sessionName ?? 'No name',
-                      style: context.textStyles.subtitle2,
-                    ),
-                    const SizedBox(width: 4.0),
-                    Text(
-                      _store.timerSessions[index]?.sessionDate.dayAndMonthName ?? DateTime.now().toString(),
-                      style: context.textStyles.subtitle2,
-                    ),
-                  ],
+        builder: (context) => SizedBox(
+          height: 224.0,
+          child: Expanded(
+            child: ListView.separated(
+              itemCount: _store.timerSessions.length,
+              separatorBuilder: (BuildContext context, int index) => const Divider(),
+              itemBuilder: (context, index) => ListTile(
+                title: Center(
+                  child: Wrap(
+                    children: [
+                      Text(
+                        _store.timerSessions[index]?.sessionName ?? 'No name',
+                        style: context.textStyles.subtitle2,
+                      ),
+                      const SizedBox(width: 4.0),
+                      Text(
+                        _store.timerSessions[index]?.sessionDate.dayAndMonthName ?? DateTime.now().toString(),
+                        style: context.textStyles.subtitle2,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -155,8 +158,8 @@ class _TimerComponentState extends State<TimerComponent> {
           _store.resetTimer(_settingsStore.selectedFocusDuration);
           await _store.saveTimerSession(
             TimerSession(
-              id: 'sessionTwo',
-              sessionName: 'Second session',
+              id: 'sessionFour',
+              sessionName: 'Fourth session',
               sessionDate: DateTime.now(),
               completedSessions: 2,
             ),

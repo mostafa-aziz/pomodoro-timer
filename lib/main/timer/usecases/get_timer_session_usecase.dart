@@ -8,6 +8,8 @@ class GetTimerSessionUsecase {
     required TimerDao timerDao,
   }) : _timerDao = timerDao;
 
+  Stream<List<TimerSession>> watchTimerSessions() => _timerDao.watchTimerSessions();
+
   Future<List<TimerSession>> getTimerSessions() async => _timerDao.fetchTimerSessions();
 
 }

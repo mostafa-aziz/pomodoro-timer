@@ -30,6 +30,8 @@ abstract class TimerStoreBase with Store {
   @observable
   List<TimerSession?> timerSessions = [];
 
+  StreamSubscription? _timerSubscription;
+
   TimerStoreBase({
     required AppPreferences preferences,
     required GetTimerSessionUsecase getTimerSessionUsecase,
@@ -41,7 +43,13 @@ abstract class TimerStoreBase with Store {
   @action
   Future<void> load() async {
     await getTimerSessions();
+    _timerSubscription = _getTimerSessionUsecase.watchTimerSessions().listen(_updateTimerSessions);
     myDuration = Duration(minutes: await _preferences.getInt('focusDuration'));
+  }
+
+  @action
+  Future<void> _updateTimerSessions(List<TimerSession> timerSessions) async {
+    this.timerSessions = timerSessions;
   }
 
   @action
