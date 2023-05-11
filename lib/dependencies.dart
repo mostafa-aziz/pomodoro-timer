@@ -6,6 +6,7 @@ import 'package:pomodoro_timer/main/settings/settings_repository.dart';
 import 'package:pomodoro_timer/main/settings/settings_store.dart';
 import 'package:pomodoro_timer/main/settings/usecases/update_settings_usecase.dart';
 import 'package:pomodoro_timer/main/timer/timer_store.dart';
+import 'package:pomodoro_timer/main/timer/usecases/clear_timer_sessions_usecase.dart';
 import 'package:pomodoro_timer/main/timer/usecases/get_timer_session_usecase.dart';
 import 'package:pomodoro_timer/main/timer/usecases/save_timer_session_usecase.dart';
 import 'package:provider/provider.dart';
@@ -58,6 +59,9 @@ class BaseDependencies extends StatelessWidget {
         Provider<SaveTimerSessionUsecase>(
           create: (context) => SaveTimerSessionUsecase(timerDao: context.read()),
         ),
+        Provider<ClearTimerSessionUsecase>(
+          create: (context) => ClearTimerSessionUsecase(timerDao: context.read()),
+        ),
       ];
 
   List<SingleChildWidget> _buildBaseStoresProviders() => [
@@ -66,6 +70,7 @@ class BaseDependencies extends StatelessWidget {
             preferences: context.read(),
             getTimerSessionUsecase: context.read(),
             saveTimerSessionUsecase: context.read(),
+            clearTimerSessionUsecase: context.read(),
           )..load(),
           dispose: (context, value) => value.dispose(),
         ),

@@ -4,6 +4,7 @@ import 'package:logging/logging.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pomodoro_timer/core_utils/preferences/app_preferences.dart';
 import 'package:pomodoro_timer/main/timer/domain/timer_session.dart';
+import 'package:pomodoro_timer/main/timer/usecases/clear_timer_sessions_usecase.dart';
 import 'package:pomodoro_timer/main/timer/usecases/get_timer_session_usecase.dart';
 import 'package:pomodoro_timer/main/timer/usecases/save_timer_session_usecase.dart';
 
@@ -17,6 +18,7 @@ abstract class TimerStoreBase with Store {
   final AppPreferences _preferences;
   final GetTimerSessionUsecase _getTimerSessionUsecase;
   final SaveTimerSessionUsecase _saveTimerSessionUsecase;
+  final ClearTimerSessionUsecase _clearTimerSessionUsecase;
 
   @observable
   Timer? countdownTimer;
@@ -36,9 +38,11 @@ abstract class TimerStoreBase with Store {
     required AppPreferences preferences,
     required GetTimerSessionUsecase getTimerSessionUsecase,
     required SaveTimerSessionUsecase saveTimerSessionUsecase,
+    required ClearTimerSessionUsecase clearTimerSessionUsecase,
   })  : _preferences = preferences,
         _getTimerSessionUsecase = getTimerSessionUsecase,
-        _saveTimerSessionUsecase = saveTimerSessionUsecase;
+        _saveTimerSessionUsecase = saveTimerSessionUsecase,
+        _clearTimerSessionUsecase = clearTimerSessionUsecase;
 
   @action
   Future<void> load() async {
@@ -101,6 +105,14 @@ abstract class TimerStoreBase with Store {
   Future<void> saveTimerSession(TimerSession timerSession) async {
     try {
       await _saveTimerSessionUsecase.saveTimerSession(timerSession);
+    } catch (cause, stacktrace) {
+      Logger.root.info(cause.toString(), cause, stacktrace);
+    }
+  }
+
+  Future<void> clearTimerSessions() async {
+    try {
+      await _clearTimerSessionUsecase.clearTimerSessions();
     } catch (cause, stacktrace) {
       Logger.root.info(cause.toString(), cause, stacktrace);
     }

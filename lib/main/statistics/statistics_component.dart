@@ -30,7 +30,11 @@ class _StatisticsComponentState extends State<StatisticsComponent> {
   Widget _buildContent(BuildContext context) => Center(
         child: Stack(
           children: [
-            _buildTimerSessionsBoard(context),
+            _buildClearTimersButton(context),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: _buildTimerSessionsBoard(context),
+            ),
           ],
         ),
       );
@@ -63,4 +67,7 @@ class _StatisticsComponentState extends State<StatisticsComponent> {
           ),
         ),
       );
+
+  Widget _buildClearTimersButton(BuildContext context) =>
+      IconButton(onPressed: () => _store.clearTimerSessions(), icon: const Icon(Icons.delete_forever));
 }

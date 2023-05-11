@@ -30,6 +30,10 @@ class TimerDao extends DatabaseAccessor<AppDatabase> with _$TimerDaoMixin {
       await into(timerTable).insertOnConflictUpdate(option);
     });
   }
+
+  Future<void> clearTimerSessions() async {
+    await delete(timerTable).go();
+  }
 }
 
 extension Factory on TimerTableData {
