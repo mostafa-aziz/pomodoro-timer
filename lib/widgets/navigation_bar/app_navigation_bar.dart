@@ -44,14 +44,12 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
             AppNavigationBarButton(
               icon: Icons.person_outline,
               onPressed: () => widget.onTap(0),
-              title: 'Profile',
               isSelected: widget.selectedIndex == 0,
             ),
             const SizedBox(width: 4.0),
             AppNavigationBarButton(
               icon: Icons.favorite_border,
               onPressed: () => widget.onTap(1),
-              title: 'Favorites',
               isSelected: widget.selectedIndex == 1,
             ),
             const SizedBox(width: 4.0),
@@ -78,14 +76,12 @@ class _CustomBottomNavigationBarState extends State<AppNavigationBar> {
             AppNavigationBarButton(
               icon: Icons.bar_chart_outlined,
               onPressed: () => widget.onTap(3),
-              title: 'Chart',
               isSelected: widget.selectedIndex == 3,
             ),
             const SizedBox(width: 4.0),
             AppNavigationBarButton(
               icon: Icons.settings_outlined,
               onPressed: () => widget.onTap(4),
-              title: 'Settings',
               isSelected: widget.selectedIndex == 4,
             ),
           ],
