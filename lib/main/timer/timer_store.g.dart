@@ -57,12 +57,36 @@ mixin _$TimerStore on TimerStoreBase, Store {
     });
   }
 
+  late final _$timerSessionsAtom =
+      Atom(name: 'TimerStoreBase.timerSessions', context: context);
+
+  @override
+  List<TimerSession?> get timerSessions {
+    _$timerSessionsAtom.reportRead();
+    return super.timerSessions;
+  }
+
+  @override
+  set timerSessions(List<TimerSession?> value) {
+    _$timerSessionsAtom.reportWrite(value, super.timerSessions, () {
+      super.timerSessions = value;
+    });
+  }
+
   late final _$loadAsyncAction =
       AsyncAction('TimerStoreBase.load', context: context);
 
   @override
   Future<void> load() {
     return _$loadAsyncAction.run(() => super.load());
+  }
+
+  late final _$getTimerSessionsAsyncAction =
+      AsyncAction('TimerStoreBase.getTimerSessions', context: context);
+
+  @override
+  Future<void> getTimerSessions() {
+    return _$getTimerSessionsAsyncAction.run(() => super.getTimerSessions());
   }
 
   late final _$disposeAsyncAction =
@@ -125,7 +149,8 @@ mixin _$TimerStore on TimerStoreBase, Store {
     return '''
 countdownTimer: ${countdownTimer},
 myDuration: ${myDuration},
-shouldStartTimer: ${shouldStartTimer}
+shouldStartTimer: ${shouldStartTimer},
+timerSessions: ${timerSessions}
     ''';
   }
 }

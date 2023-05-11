@@ -34,7 +34,7 @@ class BaseDependencies extends StatelessWidget {
 
   List<SingleChildWidget> _buildBaseProviders() => [
         Provider(create: (context) => AppPreferences()),
-        Provider(create: (context) => AppDatabase.instance),
+        Provider(create: (context) => AppDatabase.instance.timerDao),
       ];
 
   List<SingleChildWidget> _buildAuthProviders() => [];
@@ -64,6 +64,8 @@ class BaseDependencies extends StatelessWidget {
         Provider<TimerStore>(
           create: (context) => TimerStore(
             preferences: context.read(),
+            getTimerSessionUsecase: context.read(),
+            saveTimerSessionUsecase: context.read(),
           )..load(),
           dispose: (context, value) => value.dispose(),
         ),

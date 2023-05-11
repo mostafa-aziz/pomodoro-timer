@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pomodoro_timer/core_style/widgets/app_action_button.dart';
 import 'package:pomodoro_timer/core_utils/context_utils.dart';
+import 'package:pomodoro_timer/core_utils/datetime_utils.dart';
 import 'package:pomodoro_timer/main/settings/settings_store.dart';
+import 'package:pomodoro_timer/main/timer/domain/timer_session.dart';
 import 'package:pomodoro_timer/main/timer/timer_store.dart';
 import 'package:pomodoro_timer/widgets/dialogs/app_dialog.dart';
 import 'package:provider/provider.dart';
@@ -40,26 +42,58 @@ class _TimerComponentState extends State<TimerComponent> {
 
   Widget _buildContent(BuildContext context) => Observer(
         builder: (context) => Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
             children: [
-              const Spacer(),
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildTimerLabel(context),
-                  const SizedBox(height: 48.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  const Spacer(),
+                  Column(
                     children: [
-                      _buildStartTimerButton(context),
-                      const SizedBox(width: 8.0),
-                      _buildResetTimerButton(context),
+                      _buildTimerLabel(context),
+                      const SizedBox(height: 48.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _buildStartTimerButton(context),
+                          const SizedBox(width: 8.0),
+                          _buildResetTimerButton(context),
+                        ],
+                      ),
+                      const SizedBox(height: 48.0),
                     ],
                   ),
+                  _buildTimerSessionsBoard(context),
+                  const Spacer(),
                 ],
               ),
-              const Spacer(),
             ],
+          ),
+        ),
+      );
+
+  Widget _buildTimerSessionsBoard(BuildContext context) => Observer(
+        builder: (context) => Flexible(
+          child: ListView.separated(
+            itemCount: _store.timerSessions.length,
+            separatorBuilder: (BuildContext context, int index) => const Divider(),
+            itemBuilder: (context, index) => ListTile(
+              title: Center(
+                child: Wrap(
+                  children: [
+                    Text(
+                      _store.timerSessions[index]?.sessionName ?? 'No name',
+                      style: context.textStyles.subtitle2,
+                    ),
+                    const SizedBox(width: 4.0),
+                    Text(
+                      _store.timerSessions[index]?.sessionDate.dayAndMonthName ?? DateTime.now().toString(),
+                      style: context.textStyles.subtitle2,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       );
@@ -117,9 +151,20 @@ class _TimerComponentState extends State<TimerComponent> {
           _store.startTimer();
           Navigator.of(context).pop();
         },
-        onPositivePressed: (context) {
+        onPositivePressed: (context) async {
           _store.resetTimer(_settingsStore.selectedFocusDuration);
-          Navigator.of(context).pop();
+          await _store.saveTimerSession(
+            TimerSession(
+              id: 'sessionTwo',
+              sessionName: 'Second session',
+              sessionDate: DateTime.now(),
+              completedSessions: 2,
+            ),
+          );
+
+          if (mounted) {
+            Navigator.of(context).pop();
+          }
         },
       );
 }
