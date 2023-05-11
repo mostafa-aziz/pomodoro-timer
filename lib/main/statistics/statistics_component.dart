@@ -17,6 +17,8 @@ class _StatisticsComponentState extends State<StatisticsComponent> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        floatingActionButton: _buildClearTimersButton(context),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
         appBar: AppBar(
           backgroundColor: context.colors.background,
           title: Text(
@@ -30,38 +32,29 @@ class _StatisticsComponentState extends State<StatisticsComponent> {
   Widget _buildContent(BuildContext context) => Center(
         child: Stack(
           children: [
-            _buildClearTimersButton(context),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: _buildTimerSessionsBoard(context),
-            ),
+            _buildTimerSessionsBoard(context),
           ],
         ),
       );
 
   Widget _buildTimerSessionsBoard(BuildContext context) => Observer(
-        builder: (context) => SizedBox(
-          height: 500.0,
-          child: Expanded(
-            child: ListView.separated(
-              itemCount: _store.timerSessions.length,
-              separatorBuilder: (BuildContext context, int index) => const Divider(),
-              itemBuilder: (context, index) => ListTile(
-                title: Center(
-                  child: Wrap(
-                    children: [
-                      Text(
-                        _store.timerSessions[index]?.sessionName ?? 'No name',
-                        style: context.textStyles.subtitle2,
-                      ),
-                      const SizedBox(width: 4.0),
-                      Text(
-                        _store.timerSessions[index]?.sessionDate.dayAndMonthName ?? DateTime.now().toString(),
-                        style: context.textStyles.subtitle2,
-                      ),
-                    ],
+        builder: (context) => ListView.separated(
+          itemCount: _store.timerSessions.length,
+          separatorBuilder: (BuildContext context, int index) => const Divider(),
+          itemBuilder: (context, index) => ListTile(
+            title: Center(
+              child: Wrap(
+                children: [
+                  Text(
+                    _store.timerSessions[index]?.sessionName ?? 'No name',
+                    style: context.textStyles.subtitle2,
                   ),
-                ),
+                  const SizedBox(width: 4.0),
+                  Text(
+                    _store.timerSessions[index]?.sessionDate.dayAndMonthName ?? DateTime.now().toString(),
+                    style: context.textStyles.subtitle2,
+                  ),
+                ],
               ),
             ),
           ),
