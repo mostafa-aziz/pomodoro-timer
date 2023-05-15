@@ -12,10 +12,8 @@ void main() {
 Future<void> commonMain() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runZonedGuarded(() async {
-    _configureLogging();
-    runApp(const PomodoroTimerApp());
-  }, (cause, stacktrace) => Logger.root.fine(cause.toString(), cause, stacktrace));
+  _configureLogging();
+  runApp(const PomodoroTimerApp());
 }
 
 void _configureLogging() {
