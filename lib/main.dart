@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:pomodoro_timer/core_utils/preferences/app_preferences.dart';
+import 'package:pomodoro_timer/onboarding/onboarding_store.dart';
 import 'package:pomodoro_timer/pomodoro_timer_app.dart';
 import 'package:stack_trace/stack_trace.dart';
 
@@ -12,8 +14,15 @@ void main() {
 Future<void> commonMain() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  final preferences = AppPreferences();
+  final bool showOnboarding = !(await preferences.getInt(KEY_CURRENT_ONBOARDING_VERSION) == ONBOARDING_VERSION);
+
   _configureLogging();
-  runApp(const PomodoroTimerApp());
+  runApp(
+    PomodoroTimerApp(
+      showOnboarding: showOnboarding,
+    ),
+  );
 }
 
 void _configureLogging() {

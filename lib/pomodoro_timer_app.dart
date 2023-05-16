@@ -2,17 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/core_style/colors.dart';
 import 'package:pomodoro_timer/dependencies.dart';
 import 'package:pomodoro_timer/main/main_component.dart';
+import 'package:pomodoro_timer/onboarding/onboarding_component.dart';
 
-class PomodoroTimerApp extends StatelessWidget {
-  const PomodoroTimerApp({super.key});
+class PomodoroTimerApp extends StatefulWidget {
+  final bool showOnboarding;
 
+  const PomodoroTimerApp({
+    super.key,
+    required this.showOnboarding,
+  });
+
+  @override
+  State<PomodoroTimerApp> createState() => _PomodoroTimerAppState();
+}
+
+class _PomodoroTimerAppState extends State<PomodoroTimerApp> {
   @override
   Widget build(BuildContext context) => MaterialApp(
         theme: _buildThemeData(),
         builder: (context, child) => BaseDependencies(
           child: child!,
         ),
-        home: const MainComponent(),
+        home: widget.showOnboarding ? const OnboardingComponent() : const MainComponent(),
       );
 
   ThemeData _buildThemeData() => ThemeData(

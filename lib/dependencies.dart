@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/core_utils/database/app_database.dart';
 import 'package:pomodoro_timer/core_utils/preferences/app_preferences.dart';
+import 'package:pomodoro_timer/main/main_store.dart';
 import 'package:pomodoro_timer/main/profile/profile_repository.dart';
 import 'package:pomodoro_timer/main/settings/settings_repository.dart';
 import 'package:pomodoro_timer/main/settings/settings_store.dart';
@@ -65,6 +66,12 @@ class BaseDependencies extends StatelessWidget {
       ];
 
   List<SingleChildWidget> _buildBaseStoresProviders() => [
+        Provider<MainStore>(
+          create: (context) => MainStore(
+            preferences: context.read(),
+          )..load(),
+          dispose: (context, value) => value.dispose(),
+        ),
         Provider<TimerStore>(
           create: (context) => TimerStore(
             preferences: context.read(),
