@@ -10,7 +10,7 @@ part 'onboarding_store.g.dart';
 class OnboardingStore = OnboardingStoreBase with _$OnboardingStore;
 
 const String KEY_CURRENT_ONBOARDING_VERSION = 'onboarding_version_shown';
-const int ONBOARDING_VERSION = 2;
+const int ONBOARDING_VERSION = 1;
 
 abstract class OnboardingStoreBase extends BaseStore with Store {
   final AppPreferences _preferences;
