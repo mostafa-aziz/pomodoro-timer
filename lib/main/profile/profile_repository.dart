@@ -6,4 +6,6 @@ class ProfileRepository {
   const ProfileRepository({
     required AppPreferences preferences,
   }) : _preferences = preferences;
+
+  Future<void> storeCompletedSessions(String setting, Object value) => _preferences.put(setting, value);
 }
