@@ -16,9 +16,6 @@ abstract class OnboardingStoreBase extends BaseStore with Store {
   final AppPreferences _preferences;
 
   @observable
-  bool hasGrantedLocationPermissions = false;
-
-  @observable
   bool hasGrantedNotificationPermissions = false;
 
   OnboardingStoreBase({
@@ -28,7 +25,6 @@ abstract class OnboardingStoreBase extends BaseStore with Store {
   @action
   @override
   Future<void> load() async {
-    hasGrantedLocationPermissions = await Permission.location.isGranted;
     hasGrantedNotificationPermissions = await Permission.notification.isGranted;
   }
 

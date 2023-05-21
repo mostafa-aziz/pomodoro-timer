@@ -9,24 +9,6 @@ part of 'onboarding_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$OnboardingStore on OnboardingStoreBase, Store {
-  late final _$hasGrantedLocationPermissionsAtom = Atom(
-      name: 'OnboardingStoreBase.hasGrantedLocationPermissions',
-      context: context);
-
-  @override
-  bool get hasGrantedLocationPermissions {
-    _$hasGrantedLocationPermissionsAtom.reportRead();
-    return super.hasGrantedLocationPermissions;
-  }
-
-  @override
-  set hasGrantedLocationPermissions(bool value) {
-    _$hasGrantedLocationPermissionsAtom
-        .reportWrite(value, super.hasGrantedLocationPermissions, () {
-      super.hasGrantedLocationPermissions = value;
-    });
-  }
-
   late final _$hasGrantedNotificationPermissionsAtom = Atom(
       name: 'OnboardingStoreBase.hasGrantedNotificationPermissions',
       context: context);
@@ -75,7 +57,6 @@ mixin _$OnboardingStore on OnboardingStoreBase, Store {
   @override
   String toString() {
     return '''
-hasGrantedLocationPermissions: ${hasGrantedLocationPermissions},
 hasGrantedNotificationPermissions: ${hasGrantedNotificationPermissions}
     ''';
   }

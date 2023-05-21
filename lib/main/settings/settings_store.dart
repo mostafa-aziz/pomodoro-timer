@@ -14,13 +14,14 @@ abstract class SettingsStoreBase extends BaseStore with Store {
   final AppPreferences _preferences;
   final UpdateSettingsUseCase _updateSettingsUseCase;
 
+  final focusDurationValues = [25, 30, 45];
+  final breakDurationValues = [5, 10, 15];
+
   @observable
   int selectedFocusDuration = 25;
 
   @observable
-  int selectedBreakDuration = 25;
-
-  final durationValues = [25, 30, 45, 60];
+  int selectedBreakDuration = 5;
 
   SettingsStoreBase({
     required AppPreferences preferences,

@@ -73,7 +73,7 @@ class _SettingsComponentState extends State<SettingsComponent> {
             child: Observer(
                 builder: (context) => DropdownButton(
                       value: _store.selectedFocusDuration,
-                      items: _store.durationValues
+                      items: _store.focusDurationValues
                           .map((int value) => DropdownMenuItem(
                                 value: value,
                                 child: Text(value.toString()),
@@ -104,7 +104,7 @@ class _SettingsComponentState extends State<SettingsComponent> {
             child: Observer(
               builder: (context) => DropdownButton(
                 value: _store.selectedBreakDuration,
-                items: _store.durationValues
+                items: _store.breakDurationValues
                     .map(
                       (int value) => DropdownMenuItem(
                         value: value,

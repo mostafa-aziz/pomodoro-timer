@@ -9,5 +9,7 @@ class SettingsRepository {
 
   Future<void> storeSettings(String setting, Object value) => _preferences.put(setting, value);
 
-  Future<int> getSettingsForDurations(String key) => _preferences.getInt(key, defaultValue: 25);
+  Future<int> getSettingsForFocusDurations(String key) => _preferences.getInt(key, defaultValue: 25);
+
+  Future<int> getSettingsForBreakDurations(String key) => _preferences.getInt(key, defaultValue: 5);
 }
