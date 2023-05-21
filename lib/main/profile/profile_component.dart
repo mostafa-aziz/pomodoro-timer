@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/core_utils/context_utils.dart';
 import 'package:pomodoro_timer/main/settings/settings_store.dart';
+import 'package:pomodoro_timer/main/timer/timer_store.dart';
 import 'package:provider/provider.dart';
 
 class ProfileComponent extends StatefulWidget {
@@ -12,6 +13,7 @@ class ProfileComponent extends StatefulWidget {
 
 class _ProfileComponentState extends State<ProfileComponent> {
   late final _settingsStore = context.read<SettingsStore>();
+  late final _timerStore = context.read<TimerStore>();
 
   @override
   Widget build(BuildContext context) => SafeArea(
@@ -27,25 +29,23 @@ class _ProfileComponentState extends State<ProfileComponent> {
         ),
       );
 
-  Widget _buildContent(BuildContext context) => Center(
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Column(
-                children: [
-                  _buildCircleAvatar(context),
-                  const SizedBox(height: 24.0),
-                  _buildFullName(context),
-                  const SizedBox(height: 4.0),
-                  _buildFullEmail(context),
-                  const SizedBox(height: 24.0),
-                  _buildStatisticsLine(context),
-                ],
-              ),
+  Widget _buildContent(BuildContext context) => Stack(
+        children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: Column(
+              children: [
+                _buildCircleAvatar(context),
+                const SizedBox(height: 24.0),
+                _buildFullName(context),
+                const SizedBox(height: 4.0),
+                _buildFullEmail(context),
+                const SizedBox(height: 24.0),
+                _buildStatisticsLine(context),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       );
 
   Widget _buildCircleAvatar(BuildContext context) => const CircleAvatar(
@@ -63,42 +63,43 @@ class _ProfileComponentState extends State<ProfileComponent> {
         style: context.textStyles.subtitle1,
       );
 
-  Widget _buildStatisticsLine(BuildContext context) => Column(
+  Widget _buildStatisticsLine(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Column(
             children: [
               Text(
-                'Total completed sessions: ',
-                style: context.textStyles.subtitle2,
+                'Completed',
+                style: context.textStyles.bodyLarge?.copyWith(color: context.colors.tertiary),
+              ),
+              const SizedBox(height: 8.0),
+              Text(
+                '${_timerStore.completedSessions}',
+                style: context.textStyles.headline2?.copyWith(color: Colors.black),
               ),
             ],
           ),
-          const SizedBox(height: 16.0),
-          Row(
+          const SizedBox(width: 24.0),
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Current focus duration: ',
-                style: context.textStyles.subtitle2,
-              ),
+              Text('Focus', style: context.textStyles.bodyLarge?.copyWith(color: context.colors.tertiary)),
+              const SizedBox(height: 8.0),
               Text(
                 '${_settingsStore.selectedFocusDuration}',
-                style: context.textStyles.subtitle2,
+                style: context.textStyles.headline2?.copyWith(color: Colors.black),
               ),
             ],
           ),
-          const SizedBox(height: 16.0),
-          Row(
+          const SizedBox(width: 24.0),
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Current break duration: ',
-                style: context.textStyles.subtitle2,
-              ),
+              Text('Break', style: context.textStyles.bodyLarge?.copyWith(color: context.colors.tertiary)),
+              const SizedBox(height: 8.0),
               Text(
                 '${_settingsStore.selectedBreakDuration}',
-                style: context.textStyles.subtitle2,
+                style: context.textStyles.headline2?.copyWith(color: Colors.black),
               ),
             ],
           ),
