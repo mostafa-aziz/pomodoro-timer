@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pomodoro_timer/core_utils/context_utils.dart';
 import 'package:pomodoro_timer/main/settings/settings_store.dart';
 import 'package:pomodoro_timer/main/timer/timer_store.dart';
@@ -16,40 +17,37 @@ class _ProfileComponentState extends State<ProfileComponent> {
   late final _timerStore = context.read<TimerStore>();
 
   @override
-  Widget build(BuildContext context) => SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: context.colors.background,
-            title: Text(
-              'Profile',
-              style: context.textStyles.headlineLarge?.copyWith(color: context.colors.onBackground),
-            ),
-          ),
-          body: _buildContent(context),
-        ),
+  Widget build(BuildContext context) => Scaffold(
+        body: _buildContent(context),
       );
 
   Widget _buildContent(BuildContext context) => Stack(
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Column(
-              children: [
-                _buildCircleAvatar(context),
-                const SizedBox(height: 24.0),
-                _buildFullName(context),
-                const SizedBox(height: 4.0),
-                _buildFullEmail(context),
-                const SizedBox(height: 24.0),
-                _buildStatisticsLine(context),
-              ],
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.4, // Adjust the height as needed
+            width: double.infinity,
+            child: SvgPicture.asset(
+              'assets/images/bg_2.svg',
+              fit: BoxFit.cover,
             ),
+          ),
+          Column(
+            children: [
+              const SizedBox(height: 48.0),
+              _buildCircleAvatar(context),
+              const SizedBox(height: 24.0),
+              _buildFullName(context),
+              const SizedBox(height: 4.0),
+              _buildFullEmail(context),
+              const SizedBox(height: 48.0),
+              _buildStatisticsLine(context),
+            ],
           ),
         ],
       );
 
   Widget _buildCircleAvatar(BuildContext context) => const CircleAvatar(
-        radius: 88.0,
+        radius: 72.0,
         backgroundImage: NetworkImage('https://picsum.photos/id/237/200/300'),
       );
 
