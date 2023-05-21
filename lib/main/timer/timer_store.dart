@@ -100,6 +100,7 @@ abstract class TimerStoreBase with Store {
   @action
   Future<void> getTimerSessions() async {
     try {
+      await clearTimerSessions();
       timerSessions = await _getTimerSessionUsecase.getTimerSessions();
     } catch (cause, stacktrace) {
       Logger.root.info(cause.toString(), cause, stacktrace);

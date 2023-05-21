@@ -6,7 +6,6 @@ import 'package:pomodoro_timer/main/statistics/domain/chart_data.dart';
 import 'package:pomodoro_timer/main/timer/timer_store.dart';
 import 'package:pomodoro_timer/widgets/charts/app_cartesian_chart.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 class StatisticsComponent extends StatefulWidget {
   const StatisticsComponent({Key? key}) : super(key: key);
@@ -15,13 +14,16 @@ class StatisticsComponent extends StatefulWidget {
   State<StatisticsComponent> createState() => _StatisticsComponentState();
 }
 
-class _StatisticsComponentState extends State<StatisticsComponent> {
+class _StatisticsComponentState extends State<StatisticsComponent> with WidgetsBindingObserver {
   late final _store = context.read<TimerStore>();
   late List<ChartData> data;
-  late TooltipBehavior _tooltip;
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _store.getTimerSessions();
+      setState(() {});
+    });
     data = _store.timerSessions
         .map(
           (session) => ChartData(
@@ -31,7 +33,6 @@ class _StatisticsComponentState extends State<StatisticsComponent> {
         )
         .toList();
 
-    _tooltip = TooltipBehavior(enable: true);
     super.initState();
   }
 
