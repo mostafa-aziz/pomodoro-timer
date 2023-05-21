@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/core_utils/context_utils.dart';
+import 'package:pomodoro_timer/main/settings/settings_store.dart';
+import 'package:provider/provider.dart';
 
 class ProfileComponent extends StatefulWidget {
   const ProfileComponent({Key? key}) : super(key: key);
@@ -9,6 +11,8 @@ class ProfileComponent extends StatefulWidget {
 }
 
 class _ProfileComponentState extends State<ProfileComponent> {
+  late final _settingsStore = context.read<SettingsStore>();
+
   @override
   Widget build(BuildContext context) => SafeArea(
         child: Scaffold(
@@ -33,6 +37,10 @@ class _ProfileComponentState extends State<ProfileComponent> {
                   _buildCircleAvatar(context),
                   const SizedBox(height: 24.0),
                   _buildFullName(context),
+                  const SizedBox(height: 4.0),
+                  _buildFullEmail(context),
+                  const SizedBox(height: 24.0),
+                  _buildStatisticsLine(context),
                 ],
               ),
             ),
@@ -50,5 +58,50 @@ class _ProfileComponentState extends State<ProfileComponent> {
         style: context.textStyles.headline1,
       );
 
-  Widget _buildStatisticsLine(BuildContext context) => Row();
+  Widget _buildFullEmail(BuildContext context) => Text(
+        'mostafa.sa.aziz@gmail.com',
+        style: context.textStyles.subtitle1,
+      );
+
+  Widget _buildStatisticsLine(BuildContext context) => Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Total completed sessions: ',
+                style: context.textStyles.subtitle2,
+              ),
+            ],
+          ),
+          const SizedBox(height: 16.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Current focus duration: ',
+                style: context.textStyles.subtitle2,
+              ),
+              Text(
+                '${_settingsStore.selectedFocusDuration}',
+                style: context.textStyles.subtitle2,
+              ),
+            ],
+          ),
+          const SizedBox(height: 16.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Current break duration: ',
+                style: context.textStyles.subtitle2,
+              ),
+              Text(
+                '${_settingsStore.selectedBreakDuration}',
+                style: context.textStyles.subtitle2,
+              ),
+            ],
+          ),
+        ],
+      );
 }

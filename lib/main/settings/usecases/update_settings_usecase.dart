@@ -10,8 +10,4 @@ class UpdateSettingsUseCase {
   Future<void> updateFocusDuration(int value) => _repository.storeSettings('focusDuration', value);
 
   Future<void> updateBreakDuration(int value) => _repository.storeSettings('breakDuration', value);
-
-  Future<int> getFocusDuration() => _repository.getSettingsForFocusDurations('focusDuration');
-
-  Future<int> getBreakDuration() => _repository.getSettingsForBreakDurations('breakDuration');
 }

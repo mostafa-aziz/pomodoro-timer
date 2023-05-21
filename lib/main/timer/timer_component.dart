@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pomodoro_timer/core_style/widgets/app_action_button.dart';
 import 'package:pomodoro_timer/core_utils/context_utils.dart';
-import 'package:pomodoro_timer/core_utils/datetime_utils.dart';
 import 'package:pomodoro_timer/main/settings/settings_store.dart';
 import 'package:pomodoro_timer/main/timer/domain/timer_session.dart';
 import 'package:pomodoro_timer/main/timer/timer_store.dart';
@@ -63,38 +62,10 @@ class _TimerComponentState extends State<TimerComponent> {
                       const SizedBox(height: 48.0),
                     ],
                   ),
-                  _buildTimerSessionsBoard(context),
                   const Spacer(),
                 ],
               ),
             ],
-          ),
-        ),
-      );
-
-  Widget _buildTimerSessionsBoard(BuildContext context) => Observer(
-        builder: (context) => SizedBox(
-          height: 224.0,
-          child: ListView.separated(
-            itemCount: _store.timerSessions.length,
-            separatorBuilder: (BuildContext context, int index) => const Divider(),
-            itemBuilder: (context, index) => ListTile(
-              title: Center(
-                child: Wrap(
-                  children: [
-                    Text(
-                      _store.timerSessions[index]?.sessionName ?? 'No name',
-                      style: context.textStyles.subtitle2,
-                    ),
-                    const SizedBox(width: 4.0),
-                    Text(
-                      _store.timerSessions[index]?.sessionDate.dayAndMonthName ?? DateTime.now().toString(),
-                      style: context.textStyles.subtitle2,
-                    ),
-                  ],
-                ),
-              ),
-            ),
           ),
         ),
       );
