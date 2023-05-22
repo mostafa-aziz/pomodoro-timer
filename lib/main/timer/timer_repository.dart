@@ -10,4 +10,6 @@ class TimerRepository {
   Future<void> storeCompletedSessions(Object value) => _preferences.put('completedSessions', value);
 
   Future<int> getCompletedSessions() => _preferences.getInt('completedSessions', defaultValue: 0);
+
+  Future<void> clearCompletedSessions() => _preferences.put('completedSessions', 0);
 }

@@ -75,7 +75,10 @@ class BaseDependencies extends StatelessWidget {
           ),
         ),
         Provider<ClearTimerSessionUsecase>(
-          create: (context) => ClearTimerSessionUsecase(timerDao: context.read()),
+          create: (context) => ClearTimerSessionUsecase(
+            timerDao: context.read(),
+            repository: context.read(),
+          ),
         ),
       ];
 

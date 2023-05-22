@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pomodoro_timer/core_style/widgets/app_action_button.dart';
+import 'package:pomodoro_timer/widgets/buttons/app_action_button.dart';
 import 'package:pomodoro_timer/core_utils/context_utils.dart';
 import 'package:pomodoro_timer/main/settings/settings_store.dart';
 import 'package:pomodoro_timer/main/timer/domain/timer_session.dart';
