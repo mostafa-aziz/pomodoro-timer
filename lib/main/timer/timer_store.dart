@@ -33,6 +33,9 @@ abstract class TimerStoreBase with Store {
   int completedSessions = 0;
 
   @observable
+  bool shouldShowNavigationBar = true;
+
+  @observable
   List<TimerSession?> timerSessions = [];
 
   StreamSubscription? _timerSubscription;
@@ -64,6 +67,7 @@ abstract class TimerStoreBase with Store {
   @action
   void startTimer() {
     shouldStartTimer = true;
+    shouldShowNavigationBar = false;
     countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) => _setCountDown());
   }
 
@@ -81,6 +85,7 @@ abstract class TimerStoreBase with Store {
   @action
   void resetTimer(int duration) {
     stopTimer();
+    shouldShowNavigationBar = true;
     myDuration = Duration(minutes: duration);
     completedSessions++;
   }
@@ -107,6 +112,7 @@ abstract class TimerStoreBase with Store {
     }
   }
 
+  @action
   Future<void> saveTimerSession(TimerSession timerSession) async {
     try {
       await _saveTimerSessionUsecase.saveTimerSession(timerSession);
@@ -116,6 +122,7 @@ abstract class TimerStoreBase with Store {
     }
   }
 
+  @action
   Future<void> clearTimerSessions() async {
     try {
       await _clearTimerSessionUsecase.clearTimerSessions();

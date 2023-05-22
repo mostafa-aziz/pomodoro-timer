@@ -73,6 +73,23 @@ mixin _$TimerStore on TimerStoreBase, Store {
     });
   }
 
+  late final _$shouldShowNavigationBarAtom =
+      Atom(name: 'TimerStoreBase.shouldShowNavigationBar', context: context);
+
+  @override
+  bool get shouldShowNavigationBar {
+    _$shouldShowNavigationBarAtom.reportRead();
+    return super.shouldShowNavigationBar;
+  }
+
+  @override
+  set shouldShowNavigationBar(bool value) {
+    _$shouldShowNavigationBarAtom
+        .reportWrite(value, super.shouldShowNavigationBar, () {
+      super.shouldShowNavigationBar = value;
+    });
+  }
+
   late final _$timerSessionsAtom =
       Atom(name: 'TimerStoreBase.timerSessions', context: context);
 
@@ -112,6 +129,24 @@ mixin _$TimerStore on TimerStoreBase, Store {
   @override
   Future<void> getTimerSessions() {
     return _$getTimerSessionsAsyncAction.run(() => super.getTimerSessions());
+  }
+
+  late final _$saveTimerSessionAsyncAction =
+      AsyncAction('TimerStoreBase.saveTimerSession', context: context);
+
+  @override
+  Future<void> saveTimerSession(TimerSession timerSession) {
+    return _$saveTimerSessionAsyncAction
+        .run(() => super.saveTimerSession(timerSession));
+  }
+
+  late final _$clearTimerSessionsAsyncAction =
+      AsyncAction('TimerStoreBase.clearTimerSessions', context: context);
+
+  @override
+  Future<void> clearTimerSessions() {
+    return _$clearTimerSessionsAsyncAction
+        .run(() => super.clearTimerSessions());
   }
 
   late final _$disposeAsyncAction =
@@ -176,6 +211,7 @@ countdownTimer: ${countdownTimer},
 myDuration: ${myDuration},
 shouldStartTimer: ${shouldStartTimer},
 completedSessions: ${completedSessions},
+shouldShowNavigationBar: ${shouldShowNavigationBar},
 timerSessions: ${timerSessions}
     ''';
   }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pomodoro_timer/main/favorites/favorites_component.dart';
 import 'package:pomodoro_timer/main/profile/profile_component.dart';
 import 'package:pomodoro_timer/main/settings/settings_component.dart';
 import 'package:pomodoro_timer/main/statistics/statistics_component.dart';
 import 'package:pomodoro_timer/main/timer/timer_component.dart';
+import 'package:pomodoro_timer/main/timer/timer_store.dart';
 import 'package:pomodoro_timer/widgets/navigation_bar/app_navigation_bar.dart';
+import 'package:provider/provider.dart';
 
 class MainComponent extends StatefulWidget {
   const MainComponent({Key? key}) : super(key: key);
@@ -22,47 +25,49 @@ class _MainComponentState extends State<MainComponent> {
   @override
   Widget build(BuildContext context) => Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Column(
-          children: [
-            Expanded(
-              child: PageView(
-                key: MainComponent.mainPageKey,
-                controller: _pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                onPageChanged: _onPageChanged,
-                children: const [
-                  ProfileComponent(),
-                  FavoritesComponent(),
-                  TimerComponent(),
-                  StatisticsComponent(),
-                  SettingsComponent(),
-                ],
-              ),
-            ),
-            AppNavigationBar(
-              selectedIndex: selectedIndex,
-              onTap: (index) {
-                switch (index) {
-                  case 0:
-                    navigateToProfile();
-                    break;
-                  case 1:
-                    navigateToFavorites();
-                    break;
-                  case 2:
-                    navigateToTimer();
-                    break;
-                  case 3:
-                    navigateToStatistics();
-                    break;
-                  case 4:
-                    navigateToSettings();
-                    break;
-                }
-              },
-            ),
-          ],
-        ),
+        body: Observer(
+            builder: (context) => Column(
+                  children: [
+                    Expanded(
+                      child: PageView(
+                        key: MainComponent.mainPageKey,
+                        controller: _pageController,
+                        physics: const NeverScrollableScrollPhysics(),
+                        onPageChanged: _onPageChanged,
+                        children: const [
+                          ProfileComponent(),
+                          FavoritesComponent(),
+                          TimerComponent(),
+                          StatisticsComponent(),
+                          SettingsComponent(),
+                        ],
+                      ),
+                    ),
+                    if (context.read<TimerStore>().shouldShowNavigationBar)
+                      AppNavigationBar(
+                        selectedIndex: selectedIndex,
+                        onTap: (index) {
+                          switch (index) {
+                            case 0:
+                              navigateToProfile();
+                              break;
+                            case 1:
+                              navigateToFavorites();
+                              break;
+                            case 2:
+                              navigateToTimer();
+                              break;
+                            case 3:
+                              navigateToStatistics();
+                              break;
+                            case 4:
+                              navigateToSettings();
+                              break;
+                          }
+                        },
+                      ),
+                  ],
+                )),
       );
 
   void _onPageChanged(int index) {
